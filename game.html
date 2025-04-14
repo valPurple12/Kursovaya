@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            width: 67px;
+            height: 81px;
+            border: 1px solid #ccc;
+            text-align: center;
+            vertical-align: middle;
+            position: relative;
+        }
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="form">
+        <!-- Ваша форма для начала игры -->
+    </div>
+
+    <div id="gameArea" style="display: none;">
+        <table id="gameTable"></table>
+        <div>Время: <span id="timerDisplay">0</span> секунд</div>
+    </div>
+
+    <div id="modal">
+        <div id="modalContent">
+            <p id="modalMessage"></p>
+            <button id="restartButton">Начать заново</button>
+        </div>
+    </div>
+
+    <script>
+        const gameTable = document.getElementById('gameTable');
+        const timerDisplay = document.getElementById('timerDisplay');
+        let timerInterval;
+        let clickedCells = 0;
+        const cols = 3;
+        const rows = 3;
+        const cellCount = 3;
+        let cakeIndices = [];
+        
+
+        function setupGame() {
+            clickedCells = 0;
+            gameTable.innerHTML = '';
+
+            // Генерация случайных индексов для кексов
+            cakeIndices = new Set();
+            while (cakeIndices.size < cellCount) {
+                const randomIndex = Math.floor(Math.random() * (rows * cols));
+                cakeIndices.add(randomIndex);
+            }
+            cakeIndices = Array.from(cakeIndices);
+
+            for (let i = 0; i < rows; i++) {
+                let row = document.createElement('tr');
+                for (let j = 0; j < cols; j++) {
+                    let cell = document.createElement('td');
+                    const cellIndex = i * cols + j;
+                    const gif = document.createElement('img');
+                    gif.src = 'IMG/glitter-sparkle.gif';
+                    gif.alt = 'Гифка';
+                    gif.style.width = '100%';
+                    gif.style.height = '100%';
+                    cell.appendChild(gif);
+
+                    cell.addEventListener('click', function () {
+                        if (cakeIndices.includes(cellIndex)) {
+                            const cakeImg = document.createElement('img');
+                            cakeImg.src = 'IMG/капкейк.png'; 
+                            cakeImg.alt = 'Кекс';
+                            cakeImg.style.width = '100%';
+                            cakeImg.style.height = '100%';
+                            cell.innerHTML = ''; 
+                            cell.appendChild(cakeImg); 
+                            clickedCells++; 
+                        } else {
+                            const sadFaceImg = document.createElement('img');
+                            sadFaceImg.src = 'IMG/cuh-cat.gif'; 
+                            sadFaceImg.alt = 'Грустный сайлик';
+                            sadFaceImg.style.width = '100%';
+                            sadFaceImg.style.height = '100%';
+                            cell.innerHTML = ''; 
+                            cell.appendChild(sadFaceImg); 
+                        }
+                        
+                        if (clickedCells === cellCount) {
+                            clearInterval(timerInterval);
+                            document.getElementById('modalMessage').textContent = `Вы выиграли за ${parseInt(timerDisplay.textContent)} секунд. Хотите сыграть ещё раз?`;
+                            document.getElementById('modal').style.display
+                            document.getElementById('modal').style.display = 'flex'; 
+                        }
+                    });
+
+                    row.appendChild(cell);
+                }
+                gameTable.appendChild(row);
+            }
+
+            startTimer();
+        }
+
+        function startTimer() {
+            let timeElapsed = 0;
+            timerInterval = setInterval(function() {
+                timeElapsed++;
+                timerDisplay.textContent = timeElapsed;
+            }, 1000);
+        }
+
+        document.getElementById('restartButton').addEventListener('click', function() {
+            document.getElementById('modal').style.display = 'none';
+            setupGame();
+        });
+
+        // Здесь вы можете добавить код, чтобы отобразить вашу форму для начала игры
+        // Например, кнопка "Начать игру":
+        const startButton = document.createElement('button');
+        startButton.textContent = 'Начать игру';
+        startButton.addEventListener('click', function() {
+            document.getElementById('form').style.display = 'none';
+            document.getElementById('gameArea').style.display = 'block';
+            setupGame(); // Запускаем игру
+        });
+        document.getElementById('form').appendChild(startButton);
+    </script>
+</body>
+</html>

@@ -1,0 +1,866 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Bellota", serif;
+  background-color: #101623;
+  color: white;
+}
+
+h2 {
+  font-family: "Sofia Sans", serif;
+}
+
+p {
+  font-family: "Bellota", serif;
+}
+
+/* header{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgba(49, 57, 76, 0.794);
+    border-radius: 20px;
+   width: 100%;
+    height: 38px;
+} */
+nav {
+  background-color: rgba(49, 57, 76, 0.794);
+}
+
+.nav-link {
+  color: white;
+}
+
+.curtain>:first-child {
+  margin-top: 100px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-family: "Sofia Sans", serif;
+}
+
+a:hover {
+  cursor: pointer;
+  text-shadow: 2px 2px 2px rgb(170, 0, 255);
+  /* color: rgba(133, 133, 133, 0.549); */
+}
+
+.curtain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('IMG/backgroiund.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 9999;
+  transition: transform 1s ease;
+  transform-origin: top;
+  overflow: hidden;
+  font-family: "Bellota", serif;
+  color: #ac0d17;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px rgb(153, 0, 0),
+    0 0 82px rgb(153, 0, 0),
+    0 0 92px rgb(153, 0, 0),
+    0 0 102px rgb(153, 0, 0),
+    0 0 151px rgb(153, 0, 0);
+}
+
+section {
+  cursor: url(IMG/Pastry_Bag_icon-icons.com_68714.png) 2 2, auto;
+}
+
+.circles>div {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.block1 {
+  background: linear-gradient(217deg, rgba(255, 0, 0, .8), rgba(255, 98, 0, 0.893) 70.71%);
+  opacity: 0.7;
+  animation: rotate 3s infinite linear;
+  /* animation-delay: 0.2s; */
+}
+
+.block2 {
+  background: linear-gradient(217deg, rgba(255, 0, 191, 0.8), rgba(48, 37, 255, 0.703) 70.71%);
+  opacity: 0.7;
+  animation: rotate 4s infinite linear;
+  /* animation-delay: 0.4s; */
+}
+
+.block3 {
+  background: linear-gradient(217deg, rgba(106, 255, 0, 0.8), rgba(0, 255, 153, 0.781) 70.71%);
+  opacity: 0.7;
+  animation: rotate 5s infinite linear;
+  /* animation-delay: 0.5s; */
+}
+
+.block4 {
+  background: linear-gradient(217deg, rgba(255, 221, 0, 0.877), rgba(255, 242, 0, 0.772) 70.71%);
+  opacity: 0.7;
+  animation: rotate 3s infinite linear;
+  /* animation-delay: 1s; */
+
+}
+
+.circles {
+  z-index: 9999;
+  display: flex;
+  flex-wrap: wrap;
+  width: 410px;
+  height: 410px;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  text-align: center;
+}
+
+.hidden {
+  transform: translateY(-100%);
+}
+
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) translate(125px);
+  }
+
+  50% {
+    transform: rotate(180deg) translate(125px);
+  }
+
+  /*
+    75%{
+       transform: rotate(360deg) translate(180px); 
+    } */
+  100% {
+    transform: rotate(360deg) translate(125px);
+  }
+}
+
+.rainbow-button {
+  position: relative;
+  --primary-neon: rgba(255, 0, 0, 0.9);
+  --light-neon: rgba(161, 87, 87, 0.7);
+  --pulse-neon: rgba(149, 20, 20, 0.5);
+  --bright-neon: rgb(177, 24, 24);
+  --off-neon: #333;
+
+  --neon-shadow: 0 0 7px 4px var(--light-neon), 0 0 7px 4px var(--light-neon) inset;
+  --neon-shadow-pulse: 0 0 8px 5px var(--pulse-neon), 0 0 8px 5px var(--pulse-neon) inset;
+  --neon-shadow-bright: 0 0 8px 4px var(--bright-neon), 0 0 8px 4px var(--bright-neon) inset;
+  --neon-shadow-text: 0 0 7px var(--primary-neon);
+
+  width: 150px;
+  height: auto;
+  color: var(--primary-neon);
+  text-shadow: var(--neon-shadow-text);
+  border: 5px solid var(--primary-neon);
+  border-radius: 20px;
+  position: absolute;
+  left: 45%;
+  top: 85%;
+  text-align: center;
+  font-size: 2vw;
+  font-weight: bold;
+  box-shadow: var(--neon-shadow);
+  animation: flicker 5s linear infinite;
+  padding: 1rem;
+}
+
+.rainbow-button:hover {
+  cursor: pointer;
+  /* transform: translateY(-20px);
+    transition: 1s; */
+}
+
+@keyframes flicker {
+  0% {
+    box-shadow: var(--neon-shadow);
+  }
+
+  45% {
+    box-shadow: var(--neon-shadow-pulse);
+  }
+
+  65% {
+    box-shadow: none;
+    border-color: var(--off-neon);
+    color: var(--off-neon);
+    text-shadow: none;
+  }
+
+  75% {
+    box-shadow: var(--neon-shadow);
+    border-color: var(--primary-neon);
+    color: var(--primary-neon);
+    text-shadow: var(--neon-shadow-text);
+  }
+
+  85% {
+    box-shadow: none;
+    border-color: var(--off-neon);
+    color: var(--off-neon);
+    text-shadow: none;
+  }
+
+  90% {
+    box-shadow: var(--neon-shadow);
+    border-color: var(--primary-neon);
+    color: var(--primary-neon);
+    text-shadow: var(--neon-shadow-text);
+  }
+
+  90.01% {
+    box-shadow: none;
+    border-color: var(--off-neon);
+    color: var(--off-neon);
+    text-shadow: none;
+  }
+
+  94% {
+    box-shadow: none;
+    border-color: var(--off-neon);
+  }
+
+  94.01% {
+    box-shadow: var(--neon-shadow);
+    border-color: var(--primary-neon);
+  }
+
+  95% {
+    box-shadow: var(--neon-shadow);
+    border-color: var(--primary-neon);
+  }
+
+  95.01% {
+    box-shadow: none;
+    border-color: var(--off-neon);
+  }
+
+  95.5% {
+    box-shadow: none;
+    border-color: var(--off-neon);
+  }
+
+  95.51% {
+    box-shadow: var(--neon-shadow);
+    border-color: var(--primary-neon);
+  }
+
+  96% {
+    box-shadow: var(--neon-shadow);
+    border-color: var(--primary-neon);
+  }
+
+  96.01% {
+    box-shadow: none;
+    border-color: var(--off-neon);
+  }
+
+  96.5% {
+    box-shadow: none;
+    border-color: var(--off-neon);
+  }
+
+  96.51% {
+    box-shadow: var(--neon-shadow-bright);
+    border-color: var(--primary-neon);
+  }
+
+  100% {
+    box-shadow: var(--neon-shadow);
+    border-color: var(--primary-neon);
+  }
+}
+
+.rainbow-button>h2 {
+  animation: jump 1s linear infinite;
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(-2px);
+  }
+
+  50% {
+    transform: translateY(15px);
+  }
+
+  100% {
+    transform: translateY(-2px);
+  }
+}
+
+#gallery {
+  background: url('IMG/конди\ 1\ \(1\).png') no-repeat;
+  backdrop-filter: blur(1px);
+  background-size: cover;
+}
+
+.line1 {
+  position: absolute;
+  z-index: 1;
+  /* width: ; */
+  /* top: 0; */
+}
+
+.gallery-block {
+  background-color: #31394ce0;
+  width: 250px;
+  gap: 30px;
+  border-radius: 25px;
+}
+
+.gal-block {
+  background-color: #142241b8;
+  width: 300px;
+  height: 100px;
+  border-radius: 15px;
+  margin: 15px;
+  color: white;
+  font-size: 18px;
+}
+
+.gallery-text {
+  width: 520px;
+  font-size: 15px;
+  padding: 10px;
+}
+
+.block-schef {
+  /* background-image: url('IMG/шеф-кондитер.jpg');
+  background-size: cover;
+  width: 120px;
+  height: 120px;
+  border-radius: 45%; */
+  display: flex;
+  justify-content: space-between;
+  width: 450px;
+}
+
+/* 
+.block-schef:hover{
+  transform: scale(1.3);
+} */
+#ad {
+  position: fixed;
+  right: -300px;
+  top: 50%;
+  transform: translateY(-35%);
+  width: 125px;
+  height: 95px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-10deg);
+  transition: right 0.5s ease;
+  border-radius: 25px;
+}
+
+#ad:hover {
+  cursor: pointer;
+}
+
+#ad.show {
+  right: 10px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
+
+.modal:hover {
+  cursor: pointer;
+}
+
+.modal-content {
+  background-color: #1b294f94;
+  ;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* отзывы */
+.swiper-container {
+  width: 200px;
+  height: 350px;
+  /* margin-left: 25px; */
+}
+
+.swiper-slide {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* отзывы */
+
+.line {
+  width: 100%;
+  height: 102px;
+  color: white;
+  font-size: 30px;
+  background-color: #8F0000;
+  /* margin-top: -196px; 
+  padding: 30px; */
+}
+
+
+
+
+.tetris-container {
+  text-align: center;
+  border: 5px solid #ff007b;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #222;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  width: 280px;
+  height: 420px;
+}
+
+.game-window {
+  width: 235px;
+  height: 300px;
+  border: 5px solid #ff009d;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+#tetris-game {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.controls {
+  margin-top: 22px;
+}
+
+.controls>button {
+  font-family: "Press Start 2P", system-ui;
+  color: #ffffff;
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #cc0081;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.controls>button:hover {
+  background-color: #cc0081;
+  transform: scale(1.05);
+}
+
+.controls>button:active {
+  transform: scale(0.95);
+}
+
+.p {
+  background-color: #cc0081;
+  border: 2px solid #cc0081;
+  border-radius: 5px;
+}
+
+.up {
+  height: 55px;
+  width: 20px;
+  position: relative;
+  top: 18px;
+  left: 17px;
+  z-index: 1;
+}
+
+.down {
+  width: 55px;
+  height: 20px;
+  position: relative;
+  top: -20px;
+}
+
+.but {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.about-masterclass {
+  padding: 40px 0;
+}
+
+.master-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  text-align: left;
+}
+
+.master-photo {
+  width: 30%;
+  border-radius: 15px;
+  margin-right: 20px;
+}
+
+.text-content {
+  width: 65%;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #e67e22;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #d35400;
+}
+
+.text-content {
+  position: relative;
+  display: inline-block;
+}
+
+#name-master {
+  position: relative;
+}
+
+
+#name-master::after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: white;
+  left: 0;
+  bottom: -2px;
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+#masterPhoto:hover+.text-content #name-master::after {
+  transform: scaleX(1);
+}
+
+/* блок с отзывами*/
+.rating {
+  color: gold;
+  margin-bottom: 10px;
+}
+
+.star {
+  font-size: 30px;
+}
+
+/* регистрация */
+
+#registration {
+  background: url('IMG/конди\ 1\ \(1\).png') no-repeat;
+  background-size: cover;
+}
+
+.registration-card {
+  background-color: #293b5f;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.form-control:focus {
+  border-color: #ff69b4;
+  /* Розовый цвет для фокуса */
+  box-shadow: 0 0 5px rgba(255, 105, 180, .5);
+}
+
+.submit-btn {
+  background-color: #ff69b4;
+  color: white;
+}
+
+.submit-btn:hover {
+  background-color: #ff1493;
+}
+
+/* .btn-primary {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+} */
+
+a.nav-link:hover {
+  color: white;
+}
+
+.carousel-caption {
+  background: rgba(0, 1, 77, 0.5);
+  border-radius: 20px;
+  color: white;
+  padding: 50px;
+}
+
+.login-wrap {
+  /* width:100%; */
+  margin: auto;
+  max-width: 470px;
+  min-height: 610px;
+  position: relative;
+  background: url('IMG/macarons.jpg') no-repeat center;
+  /* background:url('IMG/Airbrush-image-extender.jpeg') no-repeat center; */
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+  border-radius: 30px;
+  margin-bottom: 50px;
+}
+
+.login-html {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 90px 70px 50px 70px;
+  background: rgb(72 40 146 / 71%);
+  border-radius: 20px;
+}
+
+.login-html .sign-in-htm,
+.login-html .sign-up-htm {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  transition: all .4s linear;
+}
+
+.login-html .sign-in,
+.login-html .sign-up,
+.login-form .group .check {
+  display: none;
+}
+
+.login-html .tab,
+.login-form .group .label,
+.login-form .group .button {
+  text-transform: uppercase;
+}
+
+.login-html .tab {
+  font-size: 22px;
+  margin-right: 15px;
+  padding-bottom: 5px;
+  margin: 0 15px 10px 0;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+}
+
+.login-html .sign-in:checked+.tab,
+.login-html .sign-up:checked+.tab {
+  color: #fff;
+  border-color: #1161ee;
+}
+
+.login-form {
+  min-height: 345px;
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.login-form .group {
+  margin-bottom: 15px;
+}
+
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button {
+  width: 100%;
+  color: #fff;
+  display: block;
+}
+
+.login-form .group .input,
+.login-form .group .button {
+  border: none;
+  padding: 15px 20px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, .1);
+}
+
+.login-form .group .label {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.login-form .group .button {
+  background: #1161ee;
+}
+
+.login-form .group label .icon {
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  position: relative;
+  display: inline-block;
+  background: rgba(255, 255, 255, .1);
+}
+
+.login-form .group label .icon:before,
+.login-form .group label .icon:after {
+  content: '';
+  width: 10px;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  transition: all .2s ease-in-out 0s;
+}
+
+.login-form .group label .icon:before {
+  left: 3px;
+  width: 5px;
+  bottom: 6px;
+  transform: scale(0) rotate(0);
+}
+
+.login-form .group label .icon:after {
+  top: 6px;
+  right: 0;
+  transform: scale(0) rotate(0);
+}
+
+.login-form .group .check:checked+label {
+  color: #fff;
+}
+
+.login-form .group .check:checked+label .icon {
+  background: #1161ee;
+}
+
+.login-form .group .check:checked+label .icon:before {
+  transform: scale(1) rotate(45deg);
+}
+
+.login-form .group .check:checked+label .icon:after {
+  transform: scale(1) rotate(-45deg);
+}
+
+.login-html .sign-in:checked+.tab+.sign-up+.tab+.login-form .sign-in-htm {
+  transform: rotate(0);
+}
+
+.login-html .sign-up:checked+.tab+.login-form .sign-up-htm {
+  transform: rotate(0);
+}
+
+.hr {
+  height: 2px;
+  margin: 60px 0 50px 0;
+  background: rgba(255, 255, 255, .2);
+}
+
+.foot-lnk {
+  text-align: center;
+}
+
+/*фонарик*/
+
+/* #flashlight {
+  --Xpos: 10vw;
+  --Ypos: 10vh;
+}
+
+#flashlight:before {
+  content: "";
+  display: block;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  background: radial-gradient(circle 2em at var(--Xpos) var(--Ypos), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+}
+
+#imgFlash{
+  cursor: none;
+} */
+
+#galleryImage {
+  transition: opacity 0.5s ease-in-out;
+}
+
+
+#flashlight {
+  --Xpos: 10vw;
+  --Ypos: 10vh;
+  position: relative; /* добавить относительное позиционирование */
+}
+
+#flashlight:before {
+  content: "";
+  display: block;
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  background: radial-gradient(circle 2em at var(--Xpos) var(--Ypos), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  pointer-events: none; /* чтобы клики проходили ниже */
+  cursor: none;
+}
