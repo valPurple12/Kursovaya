@@ -8,6 +8,7 @@
         table {
             border-collapse: collapse;
         }
+
         td {
             width: 67px;
             height: 81px;
@@ -16,6 +17,7 @@
             vertical-align: middle;
             position: relative;
         }
+
         #modal {
             display: none;
             position: fixed;
@@ -27,23 +29,40 @@
             justify-content: center;
             align-items: center;
         }
+
+        #buttonStart {
+            width: 120px;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff009d;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 25px;
+            margin-top: 50%;
+            margin-left: 20%;
+        }
+        #buttonStart:hover{
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
 
-    <div id="form">
-        <!-- Ваша форма для начала игры -->
-    </div>
+    <div id="form"></div>
+    
+    <button id="buttonStart">▶</button>
 
     <div id="gameArea" style="display: none;">
         <table id="gameTable"></table>
-        <div>Время: <span id="timerDisplay">0</span> секунд</div>
+        <div>Время: <span id="timerDisplay">30</span> секунд</div>
     </div>
 
     <div id="modal">
         <div id="modalContent">
-            <p id="modalMessage"></p>
-            <button id="restartButton">Начать заново</button>
+            <p id="modalMessage">Поздравляем! Вы входите в 3% людей, которые смогли пройти эту мини-игру. Поэтому, получаете возможность записаться на мастер-класс с 3% скидкой в течение 2 дней. Для активации скидки в форме регистрации нужно ввести промокод: КОНДИ25</p>
         </div>
     </div>
 
@@ -56,13 +75,12 @@
         const rows = 3;
         const cellCount = 3;
         let cakeIndices = [];
-        
+
 
         function setupGame() {
             clickedCells = 0;
             gameTable.innerHTML = '';
 
-            // Генерация случайных индексов для кексов
             cakeIndices = new Set();
             while (cakeIndices.size < cellCount) {
                 const randomIndex = Math.floor(Math.random() * (rows * cols));
@@ -85,28 +103,29 @@
                     cell.addEventListener('click', function () {
                         if (cakeIndices.includes(cellIndex)) {
                             const cakeImg = document.createElement('img');
-                            cakeImg.src = 'IMG/капкейк.png'; 
+                            cakeImg.src = 'IMG/капкейк.png';
                             cakeImg.alt = 'Кекс';
                             cakeImg.style.width = '100%';
                             cakeImg.style.height = '100%';
-                            cell.innerHTML = ''; 
-                            cell.appendChild(cakeImg); 
-                            clickedCells++; 
+                            cell.innerHTML = '';
+                            cell.appendChild(cakeImg);
+                            clickedCells++;
                         } else {
                             const sadFaceImg = document.createElement('img');
-                            sadFaceImg.src = 'IMG/cuh-cat.gif'; 
+                            sadFaceImg.src = 'IMG/cuh-cat.gif';
                             sadFaceImg.alt = 'Грустный сайлик';
                             sadFaceImg.style.width = '100%';
                             sadFaceImg.style.height = '100%';
-                            cell.innerHTML = ''; 
-                            cell.appendChild(sadFaceImg); 
+                            cell.innerHTML = '';
+                            cell.appendChild(sadFaceImg);
                         }
-                        
+
                         if (clickedCells === cellCount) {
                             clearInterval(timerInterval);
-                            document.getElementById('modalMessage').textContent = `Вы выиграли за ${parseInt(timerDisplay.textContent)} секунд. Хотите сыграть ещё раз?`;
+                            document.getElementById('modalMessage').style.display;
+                            // document.getElementById('modalMessage').textContent = `Вы выиграли за ${parseInt(timerDisplay.textContent)} секунд. Хотите сыграть ещё раз?`;
                             document.getElementById('modal').style.display
-                            document.getElementById('modal').style.display = 'flex'; 
+                            document.getElementById('modal').style.display = 'flex';
                         }
                     });
 
@@ -119,28 +138,20 @@
         }
 
         function startTimer() {
-            let timeElapsed = 0;
-            timerInterval = setInterval(function() {
-                timeElapsed++;
+            let timeElapsed = 30;
+            timerInterval = setInterval(function () {
+                timeElapsed--;
                 timerDisplay.textContent = timeElapsed;
             }, 1000);
         }
-
-        document.getElementById('restartButton').addEventListener('click', function() {
-            document.getElementById('modal').style.display = 'none';
-            setupGame();
-        });
-
-        // Здесь вы можете добавить код, чтобы отобразить вашу форму для начала игры
-        // Например, кнопка "Начать игру":
-        const startButton = document.createElement('button');
-        startButton.textContent = 'Начать игру';
-        startButton.addEventListener('click', function() {
+        const startButton = document.getElementById('buttonStart');
+        startButton.addEventListener('click', function () {
+            startButton.style.display = 'none';
             document.getElementById('form').style.display = 'none';
             document.getElementById('gameArea').style.display = 'block';
-            setupGame(); // Запускаем игру
+            setupGame();
         });
-        document.getElementById('form').appendChild(startButton);
     </script>
 </body>
+
 </html>
