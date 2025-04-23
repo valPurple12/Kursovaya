@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,31 +20,31 @@
         }
 
         #modal {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: none;
             justify-content: center;
             align-items: center;
         }
 
         #buttonStart {
-            width: 120px;
-            height: 50px;
             border: none;
-            border-radius: 10px;
-            background-color: #ff009d;
-            text-align: center;
-            color: white;
-            font-weight: bold;
-            font-size: 25px;
-            margin-top: 50%;
-            margin-left: 20%;
+    border-radius: 10px;
+    background-color: #e67e22;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    margin-top: 92%;
+    padding: 10px;
+    margin-left: 35%;
         }
-        #buttonStart:hover{
+
+        #buttonStart:hover {
             cursor: pointer;
         }
     </style>
@@ -52,18 +53,12 @@
 <body>
 
     <div id="form"></div>
-    
-    <button id="buttonStart">▶</button>
 
-    <div id="gameArea" style="display: none;">
+    <button id="buttonStart">Начать игру</button>
+
+    <div id="gameArea" style="display: none; color: white;">
+        <div>Время: <span id="timerDisplay">20</span> секунд</div>
         <table id="gameTable"></table>
-        <div>Время: <span id="timerDisplay">30</span> секунд</div>
-    </div>
-
-    <div id="modal">
-        <div id="modalContent">
-            <p id="modalMessage">Поздравляем! Вы входите в 3% людей, которые смогли пройти эту мини-игру. Поэтому, получаете возможность записаться на мастер-класс с 3% скидкой в течение 2 дней. Для активации скидки в форме регистрации нужно ввести промокод: КОНДИ25</p>
-        </div>
     </div>
 
     <script>
@@ -71,9 +66,9 @@
         const timerDisplay = document.getElementById('timerDisplay');
         let timerInterval;
         let clickedCells = 0;
-        const cols = 3;
-        const rows = 3;
-        const cellCount = 3;
+        const cols = 4;
+        const rows = 4;
+        const cellCount = 5;
         let cakeIndices = [];
 
 
@@ -112,7 +107,7 @@
                             clickedCells++;
                         } else {
                             const sadFaceImg = document.createElement('img');
-                            sadFaceImg.src = 'IMG/cuh-cat.gif';
+                            sadFaceImg.src = 'IMG/tarelka.png';
                             sadFaceImg.alt = 'Грустный сайлик';
                             sadFaceImg.style.width = '100%';
                             sadFaceImg.style.height = '100%';
@@ -121,11 +116,12 @@
                         }
 
                         if (clickedCells === cellCount) {
-                            clearInterval(timerInterval);
-                            document.getElementById('modalMessage').style.display;
-                            // document.getElementById('modalMessage').textContent = `Вы выиграли за ${parseInt(timerDisplay.textContent)} секунд. Хотите сыграть ещё раз?`;
-                            document.getElementById('modal').style.display
-                            document.getElementById('modal').style.display = 'flex';
+                            clearInterval(timerInterval); 
+                            const message = {
+                                type: 'GAME_WIN',
+                                text: 'Поздравляем! Вы входите в 3% людей, которые смогли пройти эту мини-игру. Поэтому,получаете возможность записаться на мастер-класс с 5% скидкой в течение 2 дней. Для активации скидки форме регистрации нужно ввести промокод: КОНДИ25' 
+                            };
+                            window.parent.postMessage(message, '*');
                         }
                     });
 
@@ -136,19 +132,39 @@
 
             startTimer();
         }
-
         function startTimer() {
-            let timeElapsed = 30;
+            let timeElapsed = 20;
             timerInterval = setInterval(function () {
                 timeElapsed--;
                 timerDisplay.textContent = timeElapsed;
+
+                if (timeElapsed <= 0) {
+                    gameOver();
+                }
             }, 1000);
         }
+
+        function gameOver() {
+            clearInterval(timerInterval);
+            gameTable.style.display = 'none';
+            const message = {
+                type: 'GAME_OVER',
+                text: 'Время вышло( Не расстраивайтесь, мы 100% гарантируем вам положительные эмоции и приятные воспоминания на нашем мастер-классе! Приходите, ждём именно Вас🤗'
+            };
+            window.parent.postMessage(message, '*');
+        }
+
+
         const startButton = document.getElementById('buttonStart');
         startButton.addEventListener('click', function () {
             startButton.style.display = 'none';
             document.getElementById('form').style.display = 'none';
             document.getElementById('gameArea').style.display = 'block';
+
+            window.parent.postMessage({
+                type: 'HIDE_BACKGROUND'
+            }, '*');
+
             setupGame();
         });
     </script>

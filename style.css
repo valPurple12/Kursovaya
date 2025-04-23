@@ -16,14 +16,6 @@ p {
   font-family: "Bellota", serif;
 }
 
-/* header{
-    display: flex;
-    justify-content: space-evenly;
-    background-color: rgba(49, 57, 76, 0.794);
-    border-radius: 20px;
-   width: 100%;
-    height: 38px;
-} */
 nav {
   background-color: rgba(49, 57, 76, 0.794);
 }
@@ -46,22 +38,18 @@ a {
 a:hover {
   cursor: pointer;
   text-shadow: 2px 2px 2px rgb(170, 0, 255);
-  /* color: rgba(133, 133, 133, 0.549); */
+}
+.hidden {
+  display: none !important;
 }
 
 .curtain {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   background-image: url('IMG/backgroiund.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 9999;
   transition: transform 1s ease;
   transform-origin: top;
-  overflow: hidden;
   font-family: "Bellota", serif;
   color: #ac0d17;
   text-shadow:
@@ -143,17 +131,12 @@ section {
     transform: rotate(180deg) translate(125px);
   }
 
-  /*
-    75%{
-       transform: rotate(360deg) translate(180px); 
-    } */
   100% {
     transform: rotate(360deg) translate(125px);
   }
 }
 
 .rainbow-button {
-  position: relative;
   --primary-neon: rgba(255, 0, 0, 0.9);
   --light-neon: rgba(161, 87, 87, 0.7);
   --pulse-neon: rgba(149, 20, 20, 0.5);
@@ -170,22 +153,15 @@ section {
   color: var(--primary-neon);
   text-shadow: var(--neon-shadow-text);
   border: 5px solid var(--primary-neon);
-  border-radius: 20px;
-  position: absolute;
   left: 45%;
   top: 85%;
-  text-align: center;
   font-size: 2vw;
-  font-weight: bold;
   box-shadow: var(--neon-shadow);
   animation: flicker 5s linear infinite;
-  padding: 1rem;
 }
 
 .rainbow-button:hover {
   cursor: pointer;
-  /* transform: translateY(-20px);
-    transition: 1s; */
 }
 
 @keyframes flicker {
@@ -312,64 +288,40 @@ section {
   background-size: cover;
 }
 
-.line1 {
+/* .line1 {
   position: absolute;
   z-index: 1;
-  /* width: ; */
-  /* top: 0; */
-}
+  width: ;   
+  top: 0; } */
 
 .gallery-block {
   background-color: #31394ce0;
   width: 250px;
   gap: 30px;
-  border-radius: 25px;
 }
 
 .gal-block {
   background-color: #142241b8;
   width: 300px;
   height: 100px;
-  border-radius: 15px;
-  margin: 15px;
-  color: white;
   font-size: 18px;
 }
 
 .gallery-text {
   width: 520px;
   font-size: 15px;
-  padding: 10px;
 }
 
-.block-schef {
-  /* background-image: url('IMG/шеф-кондитер.jpg');
-  background-size: cover;
-  width: 120px;
-  height: 120px;
-  border-radius: 45%; */
-  display: flex;
-  justify-content: space-between;
-  width: 450px;
-}
-
-/* 
-.block-schef:hover{
-  transform: scale(1.3);
-} */
 #ad {
+  display: flex;
   position: fixed;
   right: -300px;
   top: 50%;
   transform: translateY(-35%);
   width: 125px;
   height: 95px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transform: rotate(-10deg);
   transition: right 0.5s ease;
-  border-radius: 25px;
 }
 
 #ad:hover {
@@ -382,16 +334,8 @@ section {
 
 .modal {
   display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-  padding-top: 60px;
 }
 
 .modal:hover {
@@ -399,19 +343,15 @@ section {
 }
 
 .modal-content {
-  background-color: #1b294f94;
-  ;
+  background-color: #1b294ff0;
   margin: 5% auto;
-  padding: 20px;
   border: 1px solid #888;
   width: 60%;
 }
 
 .close {
   color: #aaa;
-  float: right;
   font-size: 28px;
-  font-weight: bold;
 }
 
 .close:hover,
@@ -425,19 +365,10 @@ section {
 .swiper-container {
   width: 200px;
   height: 350px;
-  /* margin-left: 25px; */
 }
 
 .swiper-slide {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 /* отзывы */
@@ -452,133 +383,51 @@ section {
   padding: 30px; */
 }
 
-
-
-
+/*тетрис*/
 .tetris-container {
-  text-align: center;
-  border: 5px solid #ff007b;
-  border-radius: 20px;
-  padding: 20px;
-  background-color: #222;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-  width: 280px;
+background-image: url('IMG/шеф-табличка.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+  width: 310px;
   height: 420px;
 }
 
 .game-window {
-  width: 235px;
-  height: 300px;
-  border: 5px solid #ff009d;
+  width: 280px;
+  height: 420px;
+}
+
+.tetris-container.hide-background {
+  background-image: none !important;
+}
+
+#modalContent {
+  padding: 20px;
   border-radius: 10px;
-  position: relative;
-  overflow: hidden;
+  max-width: 80%;
+  text-align: center;
 }
 
-#tetris-game {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-}
-
-.controls {
-  margin-top: 22px;
-}
-
-.controls>button {
-  font-family: "Press Start 2P", system-ui;
-  color: #ffffff;
-  padding: 10px 15px;
-  margin: 5px;
-  border: none;
-  border-radius: 5px;
-  background-color: #cc0081;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.1s;
-}
-
-.controls>button:hover {
-  background-color: #cc0081;
-  transform: scale(1.05);
-}
-
-.controls>button:active {
-  transform: scale(0.95);
-}
-
-.p {
-  background-color: #cc0081;
-  border: 2px solid #cc0081;
-  border-radius: 5px;
-}
-
-.up {
-  height: 55px;
-  width: 20px;
-  position: relative;
-  top: 18px;
-  left: 17px;
-  z-index: 1;
-}
-
-.down {
-  width: 55px;
-  height: 20px;
-  position: relative;
-  top: -20px;
-}
-
-.but {
-  display: flex;
-  justify-content: space-between;
-}
-
+/*о мастер-классе*/
 
 .about-masterclass {
   padding: 40px 0;
 }
 
-.master-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  text-align: left;
-}
-
-.master-photo {
-  width: 30%;
-  border-radius: 15px;
-  margin-right: 20px;
-}
-
 .text-content {
-  width: 65%;
+  flex: 1;
+  max-width: 600px; 
 }
+
 
 .btn {
-  display: inline-block;
-  padding: 10px 20px;
   background-color: #e67e22;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
   transition: background-color 0.3s;
 }
 
 .btn:hover {
   background-color: #d35400;
 }
-
-.text-content {
-  position: relative;
-  display: inline-block;
-}
-
-#name-master {
-  position: relative;
-}
-
 
 #name-master::after {
   content: '';
@@ -596,6 +445,10 @@ section {
   transform: scaleX(1);
 }
 
+#name-master.underline::after {
+  transform: scaleX(1);
+}
+
 /* блок с отзывами*/
 .rating {
   color: gold;
@@ -606,49 +459,6 @@ section {
   font-size: 30px;
 }
 
-/* регистрация */
-
-#registration {
-  background: url('IMG/конди\ 1\ \(1\).png') no-repeat;
-  background-size: cover;
-}
-
-.registration-card {
-  background-color: #293b5f;
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.form-control:focus {
-  border-color: #ff69b4;
-  /* Розовый цвет для фокуса */
-  box-shadow: 0 0 5px rgba(255, 105, 180, .5);
-}
-
-.submit-btn {
-  background-color: #ff69b4;
-  color: white;
-}
-
-.submit-btn:hover {
-  background-color: #ff1493;
-}
-
-/* .btn-primary {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-} */
-
 a.nav-link:hover {
   color: white;
 }
@@ -658,209 +468,327 @@ a.nav-link:hover {
   border-radius: 20px;
   color: white;
   padding: 50px;
+  height: 50%;
 }
-
-.login-wrap {
-  /* width:100%; */
-  margin: auto;
-  max-width: 470px;
-  min-height: 610px;
-  position: relative;
-  background: url('IMG/macarons.jpg') no-repeat center;
-  /* background:url('IMG/Airbrush-image-extender.jpeg') no-repeat center; */
-  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
-  border-radius: 30px;
-  margin-bottom: 50px;
-}
-
-.login-html {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  padding: 90px 70px 50px 70px;
-  background: rgb(72 40 146 / 71%);
-  border-radius: 20px;
-}
-
-.login-html .sign-in-htm,
-.login-html .sign-up-htm {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: absolute;
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
-  transition: all .4s linear;
-}
-
-.login-html .sign-in,
-.login-html .sign-up,
-.login-form .group .check {
-  display: none;
-}
-
-.login-html .tab,
-.login-form .group .label,
-.login-form .group .button {
-  text-transform: uppercase;
-}
-
-.login-html .tab {
-  font-size: 22px;
-  margin-right: 15px;
-  padding-bottom: 5px;
-  margin: 0 15px 10px 0;
-  display: inline-block;
-  border-bottom: 2px solid transparent;
-}
-
-.login-html .sign-in:checked+.tab,
-.login-html .sign-up:checked+.tab {
-  color: #fff;
-  border-color: #1161ee;
-}
-
-.login-form {
-  min-height: 345px;
-  position: relative;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-}
-
-.login-form .group {
-  margin-bottom: 15px;
-}
-
-.login-form .group .label,
-.login-form .group .input,
-.login-form .group .button {
-  width: 100%;
-  color: #fff;
-  display: block;
-}
-
-.login-form .group .input,
-.login-form .group .button {
-  border: none;
-  padding: 15px 20px;
-  border-radius: 25px;
-  background: rgba(255, 255, 255, .1);
-}
-
-.login-form .group .label {
-  color: #aaa;
-  font-size: 12px;
-}
-
-.login-form .group .button {
-  background: #1161ee;
-}
-
-.login-form .group label .icon {
-  width: 15px;
-  height: 15px;
-  border-radius: 2px;
-  position: relative;
-  display: inline-block;
-  background: rgba(255, 255, 255, .1);
-}
-
-.login-form .group label .icon:before,
-.login-form .group label .icon:after {
-  content: '';
-  width: 10px;
-  height: 2px;
-  background: #fff;
-  position: absolute;
-  transition: all .2s ease-in-out 0s;
-}
-
-.login-form .group label .icon:before {
-  left: 3px;
-  width: 5px;
-  bottom: 6px;
-  transform: scale(0) rotate(0);
-}
-
-.login-form .group label .icon:after {
-  top: 6px;
-  right: 0;
-  transform: scale(0) rotate(0);
-}
-
-.login-form .group .check:checked+label {
-  color: #fff;
-}
-
-.login-form .group .check:checked+label .icon {
-  background: #1161ee;
-}
-
-.login-form .group .check:checked+label .icon:before {
-  transform: scale(1) rotate(45deg);
-}
-
-.login-form .group .check:checked+label .icon:after {
-  transform: scale(1) rotate(-45deg);
-}
-
-.login-html .sign-in:checked+.tab+.sign-up+.tab+.login-form .sign-in-htm {
-  transform: rotate(0);
-}
-
-.login-html .sign-up:checked+.tab+.login-form .sign-up-htm {
-  transform: rotate(0);
-}
-
-.hr {
-  height: 2px;
-  margin: 60px 0 50px 0;
-  background: rgba(255, 255, 255, .2);
-}
-
-.foot-lnk {
-  text-align: center;
-}
-
-/*фонарик*/
-
-/* #flashlight {
-  --Xpos: 10vw;
-  --Ypos: 10vh;
-}
-
-#flashlight:before {
-  content: "";
-  display: block;
-  width: 200px;
-  height: 200px;
-  position: absolute;
-  background: radial-gradient(circle 2em at var(--Xpos) var(--Ypos), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-}
-
-#imgFlash{
-  cursor: none;
-} */
 
 #galleryImage {
   transition: opacity 0.5s ease-in-out;
 }
 
-
+/*фонарик*/
 #flashlight {
-  --Xpos: 10vw;
-  --Ypos: 10vh;
-  position: relative; /* добавить относительное позиционирование */
+  position: relative;
+  display: inline-block;
+  overflow: hidden; 
+  cursor: url('IMG/icons8-фонарик-48.png') 2 2, auto;
 }
 
-#flashlight:before {
-  content: "";
+#flashlight img {
   display: block;
-  width: 500px;
-  height: 500px;
+  transition: transform 0.1s ease-out; 
+}
+
+#flashlight::before {
+  content: "";
   position: absolute;
-  background: radial-gradient(circle 2em at var(--Xpos) var(--Ypos), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-  pointer-events: none; /* чтобы клики проходили ниже */
-  cursor: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle 80px at var(--Xpos) var(--Ypos),
+    transparent 20%,
+    rgb(0, 0, 0) 80%
+);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.coverflow-container {
+  flex: 1; 
+  height: 400px;
+  min-width: 400px;
+}
+
+.coverflow-container>.swiper-slide>img{
+  width: 100%;
+}
+.coverflow-swiper-slide {
+  opacity: 0.3; 
+  transition: opacity 0.3s;
+  width: 80%;
+  padding: 12px;
+  background: #ffffffed;
+}
+
+.swiper-slide-active {
+  opacity: 1;
+}
+.swiper-slide img {
+  width: 80%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* <a target="_blank" href="https://icons8.com/icon/SvlkYdTBOiXx/flashlight">Фонарик</a> иконка от <a target="_blank" href="https://icons8.com">Icons8</a> */
+
+/*карусель*/
+#heroCarousel {
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.carousel-item {
+  height: 100vh;
+  min-height: 600px;
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.5s ease;
+}
+
+.carousel-item.active img {
+  transform: scale(1.03);
+}
+
+.carousel-indicators {
+  bottom: 20px;
+}
+
+.carousel-indicators button {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  margin: 0 6px !important;
+  background-color: rgba(255,255,255,0.5) !important;
+  border: none !important;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators .active {
+  background-color: #ff6b81 !important;
+  width: 30px !important;
+  border-radius: 5px !important;
+}
+
+.carousel-caption {
+  bottom: 15% !important;
+  left: 10% !important;
+  right: auto !important;
+  max-width: 500px;
+  text-align: left !important;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  color: #333 !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transform: translateY(30px);
+  opacity: 0;
+  transition: all 0.5s ease 0.3s;
+}
+
+.carousel-item.active .carousel-caption {
+  transform: translateY(0);
+  opacity: 1;
+}
+.carousel-caption a:hover{
+background-color: #d35400;
+cursor: pointer;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px !important;
+  height: 50px !important;
+  top: 50% !important;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.9) !important;
+  border-radius: 50% !important;
+  opacity: 0 !important;
+  transition: all 0.3s ease;
+  margin: 0 15px;
+}
+
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next {
+  opacity: 1 !important;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(40%) sepia(50%) saturate(1000%) hue-rotate(330deg) !important;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.carousel-item::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0.2) 0%, transparent 100%);
+  z-index: 1;
+}
+
+#quiz-section{
+  background-color: #101623;
+}
+
+footer {
+  background-color: #101623;
+  padding: 10px 0; 
+}
+
+.footer-logo {
+  font-size: 16px; 
+  margin-bottom: 10px;
+}
+
+.footer h5 {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+li>a{
+  font-size: 16px;
+}
+.footer a {
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.price-box {
+  background-color: rgb(112 27 72);
+  transition: all 0.3s ease;
+}
+
+.price-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.current-price {
+  color: #fff;
+  font-size: 2.5rem;
+}
+
+.old-price {
+  color: rgba(255,255,255,0.7);
+  font-size: 1.5rem;
+}
+
+.discount-badge {
+  display: inline-block;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/*отзывы*/
+.reviews-swiper {
+  padding: 15px; /* Добавляем отступы для видимости теней */
+}
+
+.swiper-slide {
+  height: auto;
+}
+
+.card {
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.rating {
+  color: #ffc107;
+  letter-spacing: 2px;
+}
+
+.star {
+  position: relative;
+  display: inline-block;
+}
+
+.stats {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 992px) {
+  .row {
+      flex-direction: column;
+  }
+  
+  .col-lg-4, .col-lg-8 {
+      max-width: 100%;
+  }
+  
+  .col-lg-4 {
+      margin-bottom: 30px !important;
+  }
+}
+
+
+#registrationForm{
+  margin: 0 auto;
+  max-width: 395px;
+  min-height: 530px;
+  background: url('Выпечка\ Макарон.jpg') no-repeat center;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+
+/* #registrationForm>input:hover{
+ border: 3px solid rgba(98, 0, 255, 0.8);
+  } */
+
+#registration {
+  background: url('IMG/конди\ 1\ \(1\).png') no-repeat;
+  background-size: cover;
+}
+
+.form-control{
+  background-color: rgb(101 0 184 / 60%);
+    color: white;
+    font-weight: bold;
+}
+
+.reg{
+border-radius: 10px; 
+padding: 10px;
+background: rgba(255, 255, 255, 0.5);
+}
+
+#regButton{
+  background-color: #d080b7;
+  margin-top: 20px;
+}
+
+#regButton:hover{
+  background-color: #a46690;
 }

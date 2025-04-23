@@ -4,7 +4,8 @@ document.querySelector('.rainbow-button').addEventListener('click', function () 
     curtain.classList.add('hidden');
 });
 
-const swiper = new Swiper('.swiper-container', {
+//отзывы
+const swiperGallery = new Swiper('.gallery-swiper', {
     effect: 'cards',
     grabCursor: true,
     cardsEffect: {
@@ -12,10 +13,12 @@ const swiper = new Swiper('.swiper-container', {
     },
     autoplay: {
         delay: 8000,
-        disableOnInteraction: false,
+        disableOnInteraction: true,
     },
     loop: true,
 });
+
+
 // const slider = document.getElementById('carouselExample');
 // const curtain = document.getElementById('curtain');
 // let showSlider = () => {
@@ -37,184 +40,99 @@ const swiper = new Swiper('.swiper-container', {
 //    });
 // });
 
+
+//мини-игра
 let timeout;
 const chefBlock = document.getElementById('about-masterclass');
 const adBlock = document.getElementById('ad');
 const closeModal = document.getElementById('closeModal');
-const modal_content = document.getElementsByClassName("modal-content")
 const modal = document.getElementById("myModal");
 const span = document.getElementsByClassName("close")[0];
 
-adBlock.onclick = function () {
-    modal.style.display = "block";
-}
-
 adBlock.addEventListener('click', () => {
     modal.style.display = "block";
-})
+});
 
 span.addEventListener('click', () => {
     modal.style.display = "none";
     adBlock.style.display = "none";
-})
+});
 
-closeModal.addEventListener('click', () => {
+closeModal.addEventListener('click', (e) => {
+    e.stopPropagation();
     adBlock.style.display = "none";
-    modal.style.display = "none";
-    modal_content.style.display = "none";
-})
+});
 
 chefBlock.addEventListener('mouseenter', () => {
     timeout = setTimeout(() => {
         adBlock.classList.add('show');
-        console.log('блок показался');
-        // adBlock.style.animation = 'shake 0.5s infinite';
     }, 5000);
 });
 
 chefBlock.addEventListener('mouseleave', () => {
     clearTimeout(timeout);
-    // adBlock.classList.remove('show'); 
-    // adBlock.setAttribute('hidden', 'hidden')
+});
+
+window.addEventListener('message', function(event) {
+    if (typeof event.data === 'object' && event.data.type) {
+        switch(event.data.type) {
+            case 'GAME_WIN':
+                document.getElementById('modalMessage').textContent = event.data.text;
+                document.getElementById('modal').style.display = 'block';
+                break;
+                
+            case 'GAME_OVER':
+                document.getElementById('modalMessage').textContent = event.data.text;
+                document.getElementById('modal').style.display = 'block';
+                break;
+                
+            case 'HIDE_BACKGROUND':
+                document.querySelector('.tetris-container').style.backgroundImage = 'none';
+                break;
+        }
+    }
+    else if (typeof event.data === 'string') {
+        document.getElementById('modalMessage').textContent = event.data;
+        document.getElementById('modal').style.display = 'flex';
+    }
+});
+
+//hover имя
+document.getElementById('masterPhoto').addEventListener('mouseenter', () => {
+    document.getElementById('name-master').classList.add('underline');
+});
+
+document.getElementById('masterPhoto').addEventListener('mouseleave', () => {
+    document.getElementById('name-master').classList.remove('underline');
 });
 
 
-// window.onclick = function (event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
+//фонарик
+let flashlight = document.getElementById("flashlight");
 
-
-//let galleryBlock = document.getElementById('galleryArticle');
-
-// let master_photo = document.getElementById('masterPhoto');
-// let spanName = document.getElementById('name-master');
-
-// master_photo.addEventListener('mouseenter', ()=>{
-//     spanName.style.textDecoration = "underline";
-//     spanName.style.textDecorationColor = "white";
-// })
-
-// const startButton = document.getElementById('start-game');
-// startButton.addEventListener('click', function() {
-//     document.getElementById('form').style.display = 'none';
-//     document.getElementById('gameArea').style.display = 'block';
-//     setupGame(); 
-// });
-
-const forms = document.querySelectorAll('.needs-validation')
-
-// Loop over them and prevent submission
-Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-    }, false)
-})
-
-
-
-// var form = document.getElementById('registrationForm')
-
-// form.addEventListener('submit', function (event) {
-//     if (!form.checkValidity()) {
-//         event.preventDefault()
-//         event.stopPropagation()
-//     }
-
-//     form.classList.add('was-validated')
-// }, false)
-
-// document.addEventListener("DOMContentLoaded", function() {
-//     const phoneInput = document.getElementById('num');
-
-//     // Установить начальное значение
-//     phoneInput.value = '+7 ';
-
-//     // Обработчик события фокуса
-//     phoneInput.addEventListener('focus', function() {
-//         if (phoneInput.value === '+7 ') {
-//             phoneInput.value = '';
-//         }
-//     });
-
-//     // Обработчик события потери фокуса
-//     phoneInput.addEventListener('blur', function() {
-//         if (phoneInput.value === '') {
-//             phoneInput.value = '+7 ';
-//         }
-//     });
-// });
-
-function formatPhone(input) {
-    // Удаляем все не цифры
-    let cleaned = input.value.replace(/\D/g, '');
-
-    // Проверяем длину номера
-    if (cleaned.length > 11) {
-        cleaned = cleaned.substring(0, 10); // Максимальная длина номера
+const isTouchDevice = () => {
+    try {
+        document.createEvent("TouchEvent");
+        return true;
+    } catch (e) {
+        return false;
     }
+};
 
-    // Форматируем номер
-    const match = cleaned.match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
-    if (match) {
-        // Создаем форматированный номер
-        input.value = `+${match[1]} (${match[2]}) ${match[3]}-${match[4]}-${match[5]}`;
-    }
+function getMousePosition(e) {
+    const rect = flashlight.getBoundingClientRect();
+    const mouseX = !isTouchDevice() ? e.clientX - rect.left : e.touches[0].clientX - rect.left;
+    const mouseY = !isTouchDevice() ? e.clientY - rect.top : e.touches[0].clientY - rect.top;
+
+    flashlight.style.setProperty("--Xpos", mouseX + "px");
+    flashlight.style.setProperty("--Ypos", mouseY + "px");
 }
 
-const emailInput = document.getElementById('email');
-
-emailInput.addEventListener('input', function () {
-    const value = emailInput.value;
-    // Если символ `@` еще не был введен
-    if (value.indexOf('@') === -1) {
-        // Проверяем, идет ли курсор после введенного текста
-        const cursorPosition = emailInput.selectionStart;
-
-        // Если курсор все равно перед последним символом, добавляем `@`
-        if (cursorPosition === value.length) {
-            // Если это первая попытка ввода email
-            if (value.length > 0) {
-                emailInput.value = value + '@';
-            }
-        }
-    }
-}
-)
-
-document.addEventListener("DOMContentLoaded", function() {
-    let mouseX = 0;
-    let mouseY = 0;
-    let flashlight = document.getElementById("flashlight");
-
-    const isTouchDevice = () => {
-        try {
-            document.createEvent("TouchEvent");
-            return true;
-        } catch (e) {
-            return false;
-        }
-    };
-
-    function getMousePosition(e) {
-        mouseX = !isTouchDevice() ? e.pageX : e.touches[0].pageX;
-        mouseY = !isTouchDevice() ? e.pageY : e.touches[0].pageY;
-
-        flashlight.style.setProperty("--Xpos", mouseX + "px");
-        flashlight.style.setProperty("--Ypos", mouseY + "px");
-    }
-
-    document.addEventListener("mousemove", getMousePosition);
-    document.addEventListener("touchmove", getMousePosition);
-});
+document.addEventListener("mousemove", getMousePosition);
+document.addEventListener("touchmove", getMousePosition);
 
 
+//блок для кого мастер-класс
 
 document.querySelectorAll('.gal-block').forEach(item => {
     item.addEventListener('mouseenter', event => {
@@ -223,4 +141,209 @@ document.querySelectorAll('.gal-block').forEach(item => {
         document.getElementById('galleryImage').style.maxWidth = '500px';
         document.getElementById('galleryImage').style.maxHeight = '400px';
     });
+});
+
+//мастер-фото
+var coverSwiper = new Swiper('.coverflow-container', {
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 'auto',
+    coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: false,
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    navigation: false,
+});
+
+//слайдер
+document.addEventListener('DOMContentLoaded', function() {
+    // Устанавливаем интервал переключения (в миллисекундах)
+    const myCarousel = document.querySelector('#heroCarousel');
+    const carousel = new bootstrap.Carousel(myCarousel, {
+      interval: 5000, // 3 секунды вместо стандартных 5
+      ride: 'carousel',
+      wrap: true
+    });
+    
+    // Плавное масштабирование при переключении
+    myCarousel.addEventListener('slide.bs.carousel', function() {
+      const activeItem = this.querySelector('.carousel-item.active');
+      if (activeItem) {
+        const img = activeItem.querySelector('img');
+        img.style.transform = 'scale(1)';
+      }
+    });
+    
+    myCarousel.addEventListener('slid.bs.carousel', function() {
+      const activeItem = this.querySelector('.carousel-item.active');
+      if (activeItem) {
+        const img = activeItem.querySelector('img');
+        img.style.transform = 'scale(1.03)';
+      }
+    });
+  });
+
+
+
+
+  //квиз
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const qiuzSection = document.getElementById('quiz-section');
+    const showQuiz = document.getElementById('start-quiz');
+
+    showQuiz.addEventListener('click', (e)=>{
+        e.preventDefault();
+        qiuzSection.classList.remove('d-none');
+        qiuzSection.scrollIntoView({behavior: 'smooth'});
+
+        showQuiz.classList.add('d-none');
+    })
+   
+
+    const steps = document.querySelectorAll('.quiz-step');
+    const resultSection = document.querySelector('.quiz-result');
+    const resultTitle = document.getElementById('result-title');
+    const resultText = document.getElementById('result-text');
+    const resultImage = document.getElementById('result-image');
+    const restartBtn = document.getElementById('quiz-restart');
+    
+    let currentStep = 1;
+    let answers = {};
+ 
+    document.querySelectorAll('.quiz-options button').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const step = e.target.closest('.quiz-step');
+        const question = step.querySelector('h3').textContent;
+        const answer = e.target.dataset.value;
+        
+        answers[question] = answer;
+    
+        step.classList.add('d-none');
+        step.classList.remove('active');
+
+        if (currentStep < steps.length) {
+          currentStep++;
+          document.querySelector(`.quiz-step[data-step="${currentStep}"]`).classList.remove('d-none');
+          document.querySelector(`.quiz-step[data-step="${currentStep}"]`).classList.add('active');
+        } else {
+          showResult();
+        }
+      });
+    });
+    
+    function showResult() {
+      let result = '';
+      let description = '';
+      let image = '';
+      
+      if (answers['Какой крем вам больше нравится?'] === 'vanilla') {
+        result = 'Классический Наполеон';
+        description = 'Ваш идеальный торт — нежные коржи с ванильным кремом, лёгкая сладость и воздушная текстура.';
+        image = 'IMG/classic-napoleon.jpg';
+      } 
+      else if (answers['Какой крем вам больше нравится?'] === 'caramel') {
+        result = 'Карамельный бунтарь';
+        description = 'Вы любите глубину вкуса! Ваш Наполеон — с карамелизированными коржами и солёной карамелью.';
+        image = 'IMG/caramel-napoleon.jpg';
+      }
+      else if (answers['Какой крем вам больше нравится?'] === 'chocolate') {
+        result = 'Шоколадный бум';
+        description = 'Вы любите креативные решения и шоколадные нотки в десертах! Ваш Наполеон - шоколадный';
+        image = 'IMG/chocolate-napoleon.jpg';
+      }
+      else if (answers['Какой крем вам больше нравится?'] === 'sour') {
+        result = 'Ягодная яркость';
+        description = 'Вы ценитель классики, но любите нестандартные решения! Определенно, Ягодный Наполеон, без сомнений)';
+        image = 'IMG/berry-napoleon.jpg';
+      }
+
+      resultTitle.textContent = result;
+      resultText.textContent = description;
+      resultImage.src = image;
+      resultSection.classList.remove('d-none');
+    }
+
+    restartBtn.addEventListener('click', () => {
+      currentStep = 1;
+      answers = {};
+      resultSection.classList.add('d-none');
+      steps.forEach(step => {
+        step.classList.add('d-none');
+        step.classList.remove('active');
+      });
+      
+      document.querySelector(`.quiz-step[data-step="1"]`).classList.remove('d-none');
+      document.querySelector(`.quiz-step[data-step="1"]`).classList.add('active');
+    });
+  });
+
+
+const forms = document.querySelectorAll('.needs-validation')
+
+Array.from(forms).forEach(form => {
+  form.addEventListener('submit', event => {
+    if (!form.checkValidity()) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+
+    form.classList.add('was-validated')
+  }, false)
+})
+
+function formatPhone(input) {
+  let cleaned = input.value.replace(/\D/g, '');
+  
+  if (cleaned.length > 11) {
+    cleaned = cleaned.substring(0, 11);
+  }
+  const match = cleaned.match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+  if (match) {
+    input.value = `+${match[1]} (${match[2]}) ${match[3]}-${match[4]}-${match[5]}`;
+  }
+  
+  input.setCustomValidity(cleaned.length < 11 ? "Пожалуйста, введите телефон полностью" : "");
+}
+
+document.getElementById('registrationForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const form = e.target;
+  const formData = new FormData(form);
+  
+  if (!form.checkValidity()) {
+      form.classList.add('was-validated');
+      return;
+  }
+  
+  fetch('register.php', {
+      method: 'POST',
+      body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+          // Сбрасываем форму
+          form.reset();
+          form.classList.remove('was-validated');
+          
+          // Показываем модальное окно
+          const modal = new bootstrap.Modal(document.getElementById('successModal'));
+          modal.show();
+      } else {
+          alert('Ошибка: ' + (data.message || 'Произошла ошибка при отправке'));
+      }
+  })
+  .catch(error => {
+      console.error('Error:', error);
+      alert('Произошла ошибка при отправке формы');
+  });
 });

@@ -1,0 +1,736 @@
+   <!-- <div class="master-info">
+                <img src="IMG/шеф-кондитер.jpg" alt="Мастер-класс от [Фёдора Маффина]" class="master-photo"
+                    id="masterPhoto" />
+                <div class="text-content">
+                    <p>Ведущий мастер класса - <span id="name-master"><i>Фёдор Маффин</i></span></p>
+                    <p style="width: 500px;">
+                        известный шеф-кондитер с многолетним опытом,
+                        который научит вас секретам кондитерского искусства. Вы узнаете, как создавать настоящие
+                        шедевры, которые
+                        порадуют ваших близких и друзей. <br> Приходите, и вы не пожалеете!Присоединяйтесь к нашему захватывающему мастер-классу по кондитерскому искусству, где вы
+                        научитесь создавать великолепные десерты под руководством нашего опытного мастера
+                        Это отличная возможность развить свои навыки, получить новые знания и провести время в дружеской
+                        атмосфере с единомышленниками
+                    </p>
+                    <a href="#registration" class="btn">Записаться на мастер-класс</a>
+                </div>
+                <img src="IMG/кондитер_готовит.jpg" alt="" class="rounded float-end w-25">
+            </div> -->
+
+
+.tetris-container {
+  position: relative; 
+  background-image: url('IMG/шеф-табличка.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* width: 280px; Ширина контейнера как у вашего изображения
+  height: 420px; Высота контейнера как у вашего изображения */
+}
+
+.game-window {
+  position: absolute;
+  /* Эти значения нужно подобрать в зависимости от положения "элемента без фона" на вашем изображении */
+  top: 60px; /* Примерное значение - регулируйте под ваше изображение */
+  left: 20px; /* Примерное значение - регулируйте под ваше изображение */
+  width: 235px; /* Ширина игрового окна */
+  height: 300px; /* Высота игрового окна */
+  /*overflow: hidden; /* Скрываем всё, что выходит за границы */
+}
+/* 
+.game-window iframe {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.game-window iframe.visible {
+  opacity: 1;
+} */
+
+
+
+
+
+
+.controls {
+  margin-top: 22px;
+}
+
+.controls>button {
+  font-family: "Press Start 2P", system-ui;
+  color: #ffffff;
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #cc0081;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.controls>button:hover {
+  background-color: #cc0081;
+  transform: scale(1.05);
+}
+
+.controls>button:active {
+  transform: scale(0.95);
+}
+
+.p {
+  background-color: #cc0081;
+  border: 2px solid #cc0081;
+}
+
+.up {
+  height: 55px;
+  width: 20px;
+  top: 18px;
+  left: 17px;
+}
+
+.down {
+  width: 55px;
+  height: 20px;
+  top: -20px;
+}
+let timeout;
+const chefBlock = document.getElementById('about-masterclass');
+const adBlock = document.getElementById('ad');
+const closeModal = document.getElementById('closeModal');
+const modal = document.getElementById("myModal");
+const span = document.getElementsByClassName("close")[0];
+
+adBlock.addEventListener('click', () => {
+    modal.style.display = "block";
+});
+
+span.addEventListener('click', () => {
+    modal.style.display = "none";
+    adBlock.style.display = "none";
+});
+
+closeModal.addEventListener('click', (e) => {
+    e.stopPropagation();
+    adBlock.style.display = "none";
+});
+
+chefBlock.addEventListener('mouseenter', () => {
+    timeout = setTimeout(() => {
+        adBlock.classList.add('show');
+        adBlock.style.animation = 'shake 0.5s infinite'
+        console.log('блок показался');
+    }, 5000);
+});
+
+chefBlock.addEventListener('mouseleave', () => {
+    clearTimeout(timeout);
+});
+
+
+window.addEventListener('message', function(event) {
+    const message = event.data;
+    document.getElementById('modalMessage').textContent = message; // Устанавливаем текст сообщения
+    document.getElementById('modal').style.display = 'flex'; // Показываем модальное окно
+});
+
+
+document.getElementById('buttonStart').addEventListener('click', function() {
+    const tetrisContainer = document.querySelector('.tetris-container');
+    const gameFrame = document.getElementById('gameFrame');
+    
+    // Убираем фон
+    tetrisContainer.classList.add('hide-background');
+    
+    // Показываем игру
+    gameFrame.classList.add('visible');
+    
+    // Если нужно, можно отправить сигнал в iframe, что игра началась
+    gameFrame.onload = function() {
+      gameFrame.contentWindow.postMessage({ action: 'start' }, '*');
+    };
+  });
+
+
+
+
+
+
+
+
+
+
+
+  //игра
+let timeout;
+const chefBlock = document.getElementById('about-masterclass');
+const adBlock = document.getElementById('ad');
+const closeModal = document.getElementById('closeModal');
+const modal = document.getElementById("myModal");
+const span = document.getElementsByClassName("close")[0];
+
+// Блокировка двойного запуска игры
+let gameStarted = false;
+
+// Обработчики модального окна
+adBlock.addEventListener('click', () => {
+    modal.style.display = "block";
+});
+
+span.addEventListener('click', () => {
+    modal.style.display = "none";
+    adBlock.style.display = "none";
+});
+
+closeModal.addEventListener('click', (e) => {
+    e.stopPropagation();
+    adBlock.style.display = "none";
+});
+
+// Анимация при наведении
+chefBlock.addEventListener('mouseenter', () => {
+    timeout = setTimeout(() => {
+        adBlock.classList.add('show');
+        adBlock.style.animation = 'shake 0.5s infinite';
+    }, 5000);
+});
+
+chefBlock.addEventListener('mouseleave', () => {
+    clearTimeout(timeout);
+});
+
+// Запуск игры
+document.getElementById('buttonStart').addEventListener('click', function() {
+    if (gameStarted) return;
+    gameStarted = true;
+    
+    const tetrisContainer = document.querySelector('.tetris-container');
+    const gameFrame = document.getElementById('gameFrame');
+    
+    tetrisContainer.classList.add('hide-background');
+    gameFrame.classList.add('visible');
+    this.style.display = 'none';
+    
+    const sendStartCommand = () => {
+        gameFrame.contentWindow?.postMessage({ 
+            action: 'startGame',
+            gameId: 'cupcake-hunt' // Идентификатор игры
+        }, window.location.origin);
+    };
+    
+    if (gameFrame.contentWindow) {
+        sendStartCommand();
+    } else {
+        gameFrame.onload = sendStartCommand;
+    }
+});
+
+// Безопасная обработка сообщений
+window.addEventListener('message', function(event) {
+    // Проверяем источник сообщения
+    if (event.origin !== window.location.origin) return;
+    
+    const data = event.data;
+    
+    // Обработка победы
+    if (data.type === 'GAME_WIN') {
+        document.getElementById('modalMessage').textContent = data.text;
+        document.getElementById('modal').style.display = 'flex';
+        
+        // Прокрутка к модальному окну
+        document.getElementById('modal').scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+    
+});
+
+
+
+
+
+играааа
+
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 67px;
+            height: 81px;
+            border: 1px solid #ccc;
+            text-align: center;
+            vertical-align: middle;
+            position: relative;
+        }
+
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            /* height: 100%; */
+            height: 400px;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="form"></div>
+
+    <!-- <button id="buttonStart">▶</button> -->
+
+    <div id="gameArea" style="display: none;">
+        <table id="gameTable"></table>
+        <div>Время: <span id="timerDisplay">30</span> секунд</div>
+    </div>
+
+    <!-- <div id="modal">
+        <div id="modalContent">
+            <p id="modalMessage">Поздравляем! Вы входите в 3% людей, которые смогли пройти эту мини-игру. Поэтому, получаете возможность записаться на мастер-класс с 3% скидкой в течение 2 дней. Для активации скидки в форме регистрации нужно ввести промокод: КОНДИ25</p>
+        </div>
+    </div> -->
+
+    <script>
+        let gameStarted = false;
+
+        // Обработчик сообщений от родительского окна
+        window.parent.postMessage({
+    type: 'GAME_WIN',
+    text: 'Поздравляем! Вы входите в 3% людей, которые смогли пройти эту мини-игру. Поэтому, получаете возможность записаться на мастер-класс с 3% скидкой в течение 2 дней. Для активации скидки в форме регистрации нужно ввести промокод: КОНДИ25'
+}, window.location.origin);
+
+        function startGame() {
+            document.getElementById('form').style.display = 'none';
+            document.getElementById('gameArea').style.display = 'block';
+            setupGame();
+        }
+        const gameTable = document.getElementById('gameTable');
+        const timerDisplay = document.getElementById('timerDisplay');
+        let timerInterval;
+        let clickedCells = 0;
+        const cols = 3;
+        const rows = 3;
+        const cellCount = 3;
+        let cakeIndices = [];
+
+
+        function setupGame() {
+            clickedCells = 0;
+            gameTable.innerHTML = '';
+
+            cakeIndices = new Set();
+            while (cakeIndices.size < cellCount) {
+                const randomIndex = Math.floor(Math.random() * (rows * cols));
+                cakeIndices.add(randomIndex);
+            }
+            cakeIndices = Array.from(cakeIndices);
+
+            for (let i = 0; i < rows; i++) {
+                let row = document.createElement('tr');
+                for (let j = 0; j < cols; j++) {
+                    let cell = document.createElement('td');
+                    const cellIndex = i * cols + j;
+                    const gif = document.createElement('img');
+                    gif.src = 'IMG/glitter-sparkle.gif';
+                    gif.alt = 'Гифка';
+                    gif.style.width = '100%';
+                    gif.style.height = '100%';
+                    cell.appendChild(gif);
+
+                    cell.addEventListener('click', function () {
+                        if (cakeIndices.includes(cellIndex)) {
+                            const cakeImg = document.createElement('img');
+                            cakeImg.src = 'IMG/капкейк.png';
+                            cakeImg.alt = 'Кекс';
+                            cakeImg.style.width = '100%';
+                            cakeImg.style.height = '100%';
+                            cell.innerHTML = '';
+                            cell.appendChild(cakeImg);
+                            clickedCells++;
+                        } else {
+                            const sadFaceImg = document.createElement('img');
+                            sadFaceImg.src = 'IMG/cuh-cat.gif';
+                            sadFaceImg.alt = 'Грустный сайлик';
+                            sadFaceImg.style.width = '100%';
+                            sadFaceImg.style.height = '100%';
+                            cell.innerHTML = '';
+                            cell.appendChild(sadFaceImg);
+                        }
+                        if (clickedCells === cellCount) {
+                            clearInterval(timerInterval);
+                            const message = {
+                                type: 'GAME_WIN',
+                                text: 'Поздравляем! Вы входите в 5% людей, которые смогли пройти эту мини-игру...' // Ваш текст
+                            };
+                            window.parent.postMessage(message, '*');
+                        }
+                    });
+
+                    row.appendChild(cell);
+                }
+                gameTable.appendChild(row);
+            }
+
+            startTimer();
+        }
+
+        function startTimer() {
+            let timeElapsed = 30;
+            timerInterval = setInterval(function () {
+                timeElapsed--;
+                timerDisplay.textContent = timeElapsed;
+            }, 1000);
+        }
+        // const startButton = document.getElementById('buttonStart');
+        // startButton.addEventListener('click', function () {
+        //     startButton.style.display = 'none';
+        //     document.getElementById('form').style.display = 'none';
+        //     document.getElementById('gameArea').style.display = 'block';
+        //     setupGame();
+        // });
+
+        // document.getElementById('buttonStart').addEventListener('click', function () {
+        //     // Отправляем сообщение в родительское окно
+        //     window.parent.postMessage({
+        //         type: 'START_GAME',
+        //         action: 'hideBackground'
+        //     }, '*');
+        // });
+    </script>
+</body>
+
+</html>
+
+
+  <!-- 
+    <header class="sticky-top bg-opacity-75 p-2">
+         <a href="#"><img src="IMG/лого.jpg" alt="" class="rounded" style="width: 50px; height: 40px;"></a> 
+        <a href="#napoleon">О нас</a>
+        <a href="#for-mk">Для кого мастер класс</a>
+        <a href="#about-masterclass">О мастер классе</a>
+        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
+      aria-expanded="false">Мастер классы</a>
+    <ul class="dropdown-menu text-white">
+      <li><a class="dropdown-item" href="#">Чизкейки</a></li>
+      <li><a class="dropdown-item" href="#">Медовик</a></li>
+      <li><a class="dropdown-item" href="#">Капкейки</a></li>
+    </ul> 
+        <a href="#reviews">Отзывы</a>
+        <a href="#registration">Записаться</a>
+    </header> -->
+
+    <!-- <section>
+        <div class="container-fluid">
+            <div id="carouselExampleIndicators" class="carousel slide overflow-hidden" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="IMG/pinkCream.png" class="d-block vw-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Добро пожаловать в мир кондитерских шедевров</h5>
+                            <p>Присоединяйтесь к нашему мастер-классу и научитесь создавать прекрасные десерты!</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="IMG/waffle.webp" class="d-block vw-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Вы сможете создать десерт, который покорит сердца и никого не оставит равнодушным</h5>
+                            <p>Узнаете секреты и идеальный рецепт</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="IMG/cream.jpg" class="d-block vw-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Мягкие и воздушные кремы</h5>
+                            <p>Научитесь делать наилучшие кремы для ваших тортов и десертов!</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Предыдущий</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Следующий</span>
+                </button>
+            </div>
+        </div>
+    </section> -->
+
+
+     <!-- <div class="col-md-8 order-md-2">
+    <form id="registrationForm" class="needs-validation" novalidate method="post" action="register.php">
+        <div class="login-wrap">
+            <div class="login-html">
+                <input id="tab-1" type="radio" name="tab" class="sign-in" checked>
+                <label for="tab-1" class="tab">Через почту(email)</label>
+                <input id="tab-2" type="radio" name="tab" class="sign-up">
+                <label for="tab-2" class="tab">По номеру телефона</label>
+                <div class="login-form">
+                    <div class="sign-in-htm">
+                        <div class="group">
+                            <label for="login" class="form-label">Имя</label>
+                            <input id="login" name="name" type="text" class="form-control"
+                                placeholder="Введите Ваше имя" required>
+                            <div class="invalid-feedback">
+                                Пожалуйста, введите ваше имя.
+                            </div>
+                        </div>
+                        <div class="group">
+                            <label for="email" class="form-label">Электронная почта</label>
+                            <input id="email" type="email" name="email" class="form-control" autocomplete="off"
+                                placeholder="Введите Вашу почту (email)" required>
+                            <div class="invalid-feedback">
+                                Пожалуйста, введите корректный адрес электронной почты.
+                            </div>
+                        </div>
+                        <input type="hidden" name="reg_type" value="email">
+                        <div class="group btn" style="margin-top: 22px;">
+                            <input type="submit" class="button" value="Регистрация">
+                        </div>
+                    </div>
+                    <div class="sign-up-htm">
+                        <div class="group">
+                            <label for="login" class="form-label">Имя</label>
+                            <input id="login" name="name" type="text" class="form-control"
+                                placeholder="Введите Ваше имя" required>
+                            <div class="invalid-feedback">
+                                Пожалуйста, введите ваше имя.
+                            </div>
+                        </div>
+                        <div class="group">
+                            <label for="num" class="form-label">Телефон</label>
+                            <input type="tel" name="phone" class="form-control" id="num" placeholder="+7 (_) _--"
+                                oninput="formatPhone(this)" required>
+                            <div class="invalid-feedback">
+                                Пожалуйста, введите корректный номер телефона (11 цифр).
+                            </div>
+                        </div>
+                        <input type="hidden" name="reg_type" value="phone">
+                        <div class="group btn" style="margin-top: 22px;">
+                            <input type="submit" class="button" value="Регистрация">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div> -->
+
+
+.login-wrap {
+  margin: auto;
+  max-width: 470px;
+  min-height: 610px;
+  position: relative;
+  background: url('IMG/macarons.jpg') no-repeat center;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+  border-radius: 30px;
+  margin-bottom: 50px;
+}
+
+.login-html {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 90px 70px 50px 70px;
+  background: rgb(72 40 146 / 71%);
+  border-radius: 20px;
+}
+
+.login-html .sign-in-htm,
+.login-html .sign-up-htm {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  transition: all .4s linear;
+}
+
+.login-html .sign-in,
+.login-html .sign-up,
+.login-form .group .check {
+  display: none;
+}
+
+.login-html .tab,
+.login-form .group .label,
+.login-form .group .button {
+  text-transform: uppercase;
+}
+
+.login-html .tab {
+  font-size: 22px;
+  margin-right: 15px;
+  padding-bottom: 5px;
+  margin: 0 15px 10px 0;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+}
+
+.login-html .sign-in:checked+.tab,
+.login-html .sign-up:checked+.tab {
+  color: #fff;
+  border-color: #1161ee;
+}
+
+.login-form {
+  min-height: 345px;
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.login-form .group {
+  margin-bottom: 15px;
+}
+
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button {
+  width: 100%;
+  color: #fff;
+  display: block;
+}
+
+.login-form .group .input,
+.login-form .group .button {
+  border: none;
+  padding: 15px 20px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, .1);
+}
+
+.login-form .group .label {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.login-form .group label .icon {
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  position: relative;
+  display: inline-block;
+  background: rgba(255, 255, 255, .1);
+}
+
+.login-form .group label .icon:before,
+.login-form .group label .icon:after {
+  content: '';
+  width: 10px;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  transition: all .2s ease-in-out 0s;
+}
+
+.login-form .group label .icon:before {
+  left: 3px;
+  width: 5px;
+  bottom: 6px;
+  transform: scale(0) rotate(0);
+}
+
+.login-form .group label .icon:after {
+  top: 6px;
+  right: 0;
+  transform: scale(0) rotate(0);
+}
+
+.login-form .group .check:checked+label {
+  color: #fff;
+}
+
+.login-form .group .check:checked+label .icon {
+  background: #1161ee;
+}
+
+.login-form .group .check:checked+label .icon:before {
+  transform: scale(1) rotate(45deg);
+}
+
+.login-form .group .check:checked+label .icon:after {
+  transform: scale(1) rotate(-45deg);
+}
+
+.login-html .sign-in:checked+.tab+.sign-up+.tab+.login-form .sign-in-htm {
+  transform: rotate(0);
+}
+
+.login-html .sign-up:checked+.tab+.login-form .sign-up-htm {
+  transform: rotate(0);
+}
+
+.hr {
+  height: 2px;
+  margin: 60px 0 50px 0;
+  background: rgba(255, 255, 255, .2);
+}
+
+.foot-lnk {
+  text-align: center;
+}
+
+
+//   document.addEventListener('DOMContentLoaded', function() {
+//     // Получаем элементы
+//     const form = document.getElementById('registrationForm');
+//     const phoneGroup = document.getElementById('phoneGroup');
+//     const phoneInput = document.getElementById('phone');
+    
+//     phoneInput.addEventListener('input', function(e) {
+//         let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+//         e.target.value = !x[2] ? x[1] : '+' + x[1] + ' (' + x[2] + ') ' + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
+//     });
+    
+//     // Валидация формы
+//     form.addEventListener('submit', function(event) {
+//         // Проверяем валидность телефона, если он выбран
+//         if (phoneRadio.checked) {
+//             const phoneRegex = /^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/;
+//             if (!phoneRegex.test(phoneInput.value)) {
+//                 phoneInput.setCustomValidity("Введите телефон в формате +7 (XXX) XXX-XX-XX");
+//             } else {
+//                 phoneInput.setCustomValidity("");
+//             }
+//         }
+        
+//         if (!form.checkValidity()) {
+//             event.preventDefault();
+//             event.stopPropagation();
+//         }
+        
+//         form.classList.add('was-validated');
+//     }, false);
+// });
