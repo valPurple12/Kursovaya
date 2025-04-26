@@ -18,29 +18,6 @@ const swiperGallery = new Swiper('.gallery-swiper', {
     loop: true,
 });
 
-
-// const slider = document.getElementById('carouselExample');
-// const curtain = document.getElementById('curtain');
-// let showSlider = () => {
-//    if (curtain.classList.contains('hidden')) {
-//       slider.init();
-//    } else {
-//       slider.destroy();
-//    }
-// };
-
-// document.addEventListener('DOMContentLoaded', () => {
-//    const blocks = document.querySelectorAll('.block');
-
-//    blocks.forEach(block => {
-//        const randomDuration = Math.random() * (5 - 1) + 5; // Время от 5 до 10 секунд
-//        const randomDelay = Math.random() * 3; // Случайная задержка до 5 секунд
-//        block.style.animationDuration = `${randomDuration}s`;
-//        block.style.animationDelay = `${randomDelay}s`;
-//    });
-// });
-
-
 //мини-игра
 let timeout;
 const chefBlock = document.getElementById('about-masterclass');
@@ -165,15 +142,13 @@ var coverSwiper = new Swiper('.coverflow-container', {
 
 //слайдер
 document.addEventListener('DOMContentLoaded', function() {
-    // Устанавливаем интервал переключения (в миллисекундах)
     const myCarousel = document.querySelector('#heroCarousel');
     const carousel = new bootstrap.Carousel(myCarousel, {
-      interval: 5000, // 3 секунды вместо стандартных 5
+      interval: 5000, 
       ride: 'carousel',
       wrap: true
     });
     
-    // Плавное масштабирование при переключении
     myCarousel.addEventListener('slide.bs.carousel', function() {
       const activeItem = this.querySelector('.carousel-item.active');
       if (activeItem) {
@@ -331,11 +306,9 @@ document.getElementById('registrationForm').addEventListener('submit', function(
   .then(response => response.json())
   .then(data => {
       if (data.success) {
-          // Сбрасываем форму
           form.reset();
           form.classList.remove('was-validated');
           
-          // Показываем модальное окно
           const modal = new bootstrap.Modal(document.getElementById('successModal'));
           modal.show();
       } else {

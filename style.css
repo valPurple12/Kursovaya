@@ -669,11 +669,11 @@ li>a{
   text-decoration: underline;
 }
 
+
 .price-box {
-  background-color: rgb(112 27 72);
+  background-color: rgba(112, 27, 72, 0.8);
   transition: all 0.3s ease;
 }
-
 .price-box:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
@@ -695,6 +695,8 @@ li>a{
   animation: pulse 2s infinite;
 }
 
+
+
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
@@ -703,7 +705,7 @@ li>a{
 
 /*отзывы*/
 .reviews-swiper {
-  padding: 15px; /* Добавляем отступы для видимости теней */
+  padding: 15px; 
 }
 
 .swiper-slide {
@@ -757,7 +759,7 @@ li>a{
   margin: 0 auto;
   max-width: 395px;
   min-height: 530px;
-  background: url('Выпечка\ Макарон.jpg') no-repeat center;
+  background: url('IMG/Выпечка\ Макарон.jpg') no-repeat center;
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
   margin-bottom: 50px;
   cursor: pointer;

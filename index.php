@@ -8,7 +8,7 @@ require_once('config.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Курсовая КОПИЯ</title>
+    <title>Курсовая</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,9 +19,8 @@ require_once('config.php');
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<link rel="stylesheet" href="style.css">
 
-    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="container-fluid d-flex flex-column min-vh-100">
@@ -82,7 +81,6 @@ require_once('config.php');
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
         </div>
 
-        <!-- Слайды -->
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="IMG/стиль.jpg" class="d-block w-100" alt="Торты">
@@ -93,7 +91,6 @@ require_once('config.php');
                 </div>
             </div>
 
-            <!-- Слайд 2 -->
             <div class="carousel-item">
                 <img src="IMG/ингридиенты.jpg" class="d-block w-100" alt="Ингредиенты">
                 <div class="carousel-caption animate__animated animate__fadeInRight">
@@ -104,7 +101,6 @@ require_once('config.php');
                 </div>
             </div>
 
-            <!-- Слайд 3 -->
             <div class="carousel-item">
                 <img src="IMG/секреты.jpg" class="d-block w-100" alt="Процесс">
                 <div class="carousel-caption animate__animated animate__fadeInLeft">
@@ -614,36 +610,37 @@ require_once('config.php');
     </section>
 
 
+
     <section id="registration">
     <h2 class="p-4">Записаться</h2>
     <div class="row">
-        <div class="col-md-4 order-md-1 p-4">
+        <div class="col-md-5 order-md-1 p-4">
             <div class="price-box text-white p-4 rounded shadow">
-                <h3>Специальное предложение!</h3>
+                <h4>Специальное предложение!</h4>
                 <p>Стоимость мастер-класса:</p>
-                <div class="price-amount fs-2 fw-bold">
+                <div class="price-amount fs-4 fw-bold">
                     <span class="current-price">3 900 ₽</span>
                     <span class="old-price text-decoration-line-through ms-2">5 000 ₽</span>
                 </div>
                 <p>Что вы получаете по итогам мастер класса:</p>
-                <div class="price-details mt-2">
+                <div class="price-details mt-2 fs-6">
                     <p><i class="bi bi-check2-circle me-2"></i>Практику в приготовлении десерта</p>
                     <p><i class="bi bi-check2-circle me-2"></i>Уникальный PDF-файл "20 вау-декоров"</p>
                     <p><i class="bi bi-check2-circle me-2"></i>Сертификат участника</p>
                 </div>
 
-                <div class="price-details mt-2">
+                <div class="price-details mt-2 fs-6">
                     <p><i class="bi bi-check-circle-fill me-2"></i>Продолжительность: 4 часа</p>
                     <p><i class="bi bi-check-circle-fill me-2"></i>Все материалы включены</p>
                     <p><i class="bi bi-check-circle-fill me-2"></i>Спец.форму предоставим</p>
                 </div>
-                <div class="discount-badge bg-danger text-white p-2 rounded mt-2">
+                <div class="discount-badge bg-danger text-white p-2 rounded mt-2 fs-6">
                     Экономия 1 100 ₽
                 </div>
             </div>
         </div>
 
-        <div class="col-md-8 order-md-2 p-4">
+        <div class="col-md-5 order-md-2 p-4">
             <form id="registrationForm" action="register.php" class="d-flex justify-content-center flex-column rounded-4 p-5 needs-validation" method="post" novalidate>
                 <h4 class="text-center">Регистрация</h4>
                 <div class="reg">
