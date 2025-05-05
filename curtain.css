@@ -1,0 +1,180 @@
+
+/*шторы*/
+.curtain-title {
+    font-size: 40px;
+    margin-top: 20px;
+  }
+  
+  .curtain-subtitle {
+    font-size: 70px;
+  }
+  
+  .curtain-logo {
+    width: 300px;
+    max-width: 80%;
+  }
+  
+  .curtain {
+    background-image: url('IMG/backgroiund.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 9999;
+    transition: transform 1s ease;
+    transform-origin: top;
+    font-family: "Bellota", serif;
+    color: #ac0d17;
+    text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px rgb(153, 0, 0),
+      0 0 82px rgb(153, 0, 0),
+      0 0 92px rgb(153, 0, 0),
+      0 0 102px rgb(153, 0, 0),
+      0 0 151px rgb(153, 0, 0);
+  }
+  
+  .circles>div {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .block1 {
+    background: linear-gradient(217deg, rgba(255, 0, 0, .8), rgba(255, 98, 0, 0.893) 70.71%);
+    opacity: 0.7;
+    animation: rotate 3s infinite linear;
+  }
+  
+  .block2 {
+    background: linear-gradient(217deg, rgba(255, 0, 191, 0.8), rgba(48, 37, 255, 0.703) 70.71%);
+    opacity: 0.7;
+    animation: rotate 4s infinite linear;
+  }
+  
+  .block3 {
+    background: linear-gradient(217deg, rgba(106, 255, 0, 0.8), rgba(0, 255, 153, 0.781) 70.71%);
+    opacity: 0.7;
+    animation: rotate 5s infinite linear;
+  }
+  
+  .block4 {
+    background: linear-gradient(217deg, rgba(255, 221, 0, 0.877), rgba(255, 242, 0, 0.772) 70.71%);
+    opacity: 0.7;
+    animation: rotate 3s infinite linear;
+  }
+  
+  .circles {
+    z-index: 9999;
+    display: flex;
+    flex-wrap: wrap;
+    width: 410px;
+    height: 410px;
+  }
+  
+  
+  .switch-container {
+    margin-top: 20px;
+    max-width: 160px;
+    left: 45%;
+    top: 80%;
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 45px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider2 {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:#ac0d17;
+    transition: .4s;
+    border-radius: 45px;
+  }
+  
+  .slider2:before {
+    position: absolute;
+    content: "";
+    height: 35px;
+    width: 35px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider2 {
+    background-color: #ccc;
+  }
+  
+  input:checked + .slider2:before {
+    transform: translateX(75px);
+  }
+  
+  .slider2:after {
+    content: "";
+    position: absolute;
+    left: -150px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  
+  @keyframes offCurtain {
+    0% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+  }
+  
+  .animation-start p,   
+  .animation-start img,
+  .animation-start .circles{     
+    animation: offCurtain 3s forwards; 
+    animation-delay: 1s;
+    pointer-events: none;
+  }
+  
+  @keyframes upCurtain {
+    0%{
+      transform: translate(0px, 0px);
+    }
+    100%{
+      transform: translate(0, -100%);
+    }
+  }
+  
+  .start-up {
+    animation: upCurtain 4s forwards;
+    animation-delay: 3s;
+  } 
+  
+  
+@keyframes rotate {
+    0% {
+      transform: rotate(0deg) translate(125px);
+    }
+  
+    50% {
+      transform: rotate(180deg) translate(125px);
+    }
+  
+    100% {
+      transform: rotate(360deg) translate(125px);
+    }
+  }
+  

@@ -1,27 +1,4 @@
 <?php
-// require 'config.php'; 
-
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-//     $name = htmlspecialchars(trim($_POST['name']));
-//     $tel = htmlspecialchars(trim($_POST['phone']));
-//     if (empty($name)) {
-//         die("Имя обязательно для заполнения!");
-//     }
-//     else if(empty($tel)){
-//         die("Телефон обязательно для заполнения!");
-//     }
-
-//     try {
-//         $stmt = $conn->prepare("INSERT INTO registrations (name, phone) VALUES (?, ?)");
-//         $stmt->execute([$name, $tel]);
-        
-//         header('Location: index.php');
-//         exit;
-//     } catch (PDOException $e) {
-//         die("Ошибка записи: " . $e->getMessage());
-//     }
-// }
 require 'config.php';
 
 header('Content-Type: application/json');
@@ -31,6 +8,12 @@ $response = ['success' => false, 'message' => ''];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = htmlspecialchars(trim($_POST['name'] ?? ''));
     $tel = htmlspecialchars(trim($_POST['phone'] ?? ''));
+    $promo = htmlspecialchars(trim($_POST['promo'] ?? '')); 
+    $price = 3900;
+    
+    if (strtoupper($promo) === 'КОНДИ25') {
+        $price = 3700;
+    }
 
     if (empty($name)) {
         $response['message'] = "Имя обязательно для заполнения!";
@@ -45,10 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        $stmt = $conn->prepare("INSERT INTO registrations (name, phone) VALUES (?, ?)");
-        $stmt->execute([$name, $tel]);
+        $stmt = $conn->prepare("INSERT INTO registrations (name, phone, promo, price) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$name, $tel, $promo, $price]);
         
         $response['success'] = true;
+        $response['price'] = $price;
         echo json_encode($response);
         exit;
     } catch (PDOException $e) {

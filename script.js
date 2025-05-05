@@ -1,7 +1,37 @@
 'use strict';
 const curtain = document.getElementById('curtain');
-document.querySelector('.rainbow-button').addEventListener('click', function () {
-    curtain.classList.add('hidden');
+let offLight = document.getElementById('off');
+let onLight = document.getElementById('on');
+
+
+//шторы
+document.querySelector('.switch').addEventListener('click', ()=>{
+  onLight.remove();
+  offLight.removeAttribute('hidden');
+  curtain.classList.add('animation-start');
+  curtain.classList.add('start-up');
+  console.log('функция рабоатет');
+})
+
+//прокрутка хэдэра
+let lastScroll = 0;
+const navbar = document.getElementById('smart-navbar');
+
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+  
+  if (currentScroll <= 5) {
+    navbar.classList.remove('translate-middle-y', 'opacity-0', 'invisible');
+    return;
+  }
+  
+  if (currentScroll > lastScroll) {
+    navbar.classList.add('translate-middle-y', 'opacity-0', 'invisible');
+  } else {
+    navbar.classList.remove('translate-middle-y', 'opacity-0', 'invisible');
+  }
+  
+  lastScroll = currentScroll;
 });
 
 //отзывы
@@ -18,8 +48,11 @@ const swiperGallery = new Swiper('.gallery-swiper', {
     loop: true,
 });
 
+
 //мини-игра
 let timeout;
+let clickAd = false;
+let promoInput = document.getElementById('promo');
 const chefBlock = document.getElementById('about-masterclass');
 const adBlock = document.getElementById('ad');
 const closeModal = document.getElementById('closeModal');
@@ -28,6 +61,8 @@ const span = document.getElementsByClassName("close")[0];
 
 adBlock.addEventListener('click', () => {
     modal.style.display = "block";
+    clickAd = true;
+    promoInput.removeAttribute('disabled');
 });
 
 span.addEventListener('click', () => {
@@ -43,6 +78,7 @@ closeModal.addEventListener('click', (e) => {
 chefBlock.addEventListener('mouseenter', () => {
     timeout = setTimeout(() => {
         adBlock.classList.add('show');
+        console.log('блок показался');
     }, 5000);
 });
 
@@ -103,21 +139,52 @@ function getMousePosition(e) {
 
     flashlight.style.setProperty("--Xpos", mouseX + "px");
     flashlight.style.setProperty("--Ypos", mouseY + "px");
+    e.preventDefault();
 }
 
 document.addEventListener("mousemove", getMousePosition);
 document.addEventListener("touchmove", getMousePosition);
 
 
-//блок для кого мастер-класс
+//блок с гифкой
+const initialGif = document.getElementById('initialGif'); 
+const galleryBlocks = document.querySelectorAll('.gal-block'); 
+const galleryImageBlock = document.querySelector('.gallery-block'); 
+const galleryText = document.querySelector('.gallery-text');
 
-document.querySelectorAll('.gal-block').forEach(item => {
-    item.addEventListener('mouseenter', event => {
-        const newImage = item.getAttribute('data-image');
-        document.getElementById('galleryImage').src = newImage;
-        document.getElementById('galleryImage').style.maxWidth = '500px';
-        document.getElementById('galleryImage').style.maxHeight = '400px';
-    });
+let isGifJumped = false;
+
+const textMessages = [
+  "Вы можете не переживать из-за Вашего уровня в кондитерском деле. На нашем мастер классе, под руководством опытных шеф-кондитеров у Вас всё получится, мы даём 100% гарантию",
+  "...развиваться в кондитерском направлении? Начните с нашего мастер-класса!",
+  "...работами профессиональных кондитеров? Теперь вы сможете так же!",
+  "...дома и хотите научиться чему-то новому? У нас есть новые рецепты для вас!"
+];
+
+initialGif.addEventListener('mouseenter', () => {
+  if (!isGifJumped) {
+    initialGif.remove(); 
+    galleryBlocks[0].insertAdjacentHTML('beforeend', 
+      '<img src="IMG/output-onlinegiftools.gif" class="jumping-gif" style="width: 70px; position: absolute; right: 10px; top: 10px; margin: 5px;">'
+    );
+    isGifJumped = true;
+  }
+});
+
+galleryBlocks.forEach((block, index) => {
+  block.addEventListener('mouseenter', () => {
+    if (!isGifJumped) return;
+
+    const newImage = block.getAttribute('data-image');
+    galleryImageBlock.innerHTML = `<img src="${newImage}" style="max-width: 500px; max-height: 400px;">`;
+    galleryText.textContent = textMessages[index];
+    const currentGif = document.querySelector('.jumping-gif');
+    if (currentGif) currentGif.remove();
+    const nextIndex = (index + 1) % galleryBlocks.length; 
+    galleryBlocks[nextIndex].insertAdjacentHTML('beforeend', 
+      '<img src="IMG/output-onlinegiftools.gif" class="jumping-gif" style="width: 70px; position: absolute; right: 10px; top: 10px; margin: 5px;">'
+    );
+  });
 });
 
 //мастер-фото
@@ -165,8 +232,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-
-
 
 
   //квиз
@@ -261,6 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 
+//валидация формы регистрации
 const forms = document.querySelectorAll('.needs-validation')
 
 Array.from(forms).forEach(form => {

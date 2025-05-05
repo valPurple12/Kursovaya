@@ -5,7 +5,6 @@ html {
   box-sizing: border-box;
   font-family: "Bellota", serif;
   background-color: #101623;
-  color: white;
 }
 
 h2 {
@@ -43,71 +42,24 @@ a:hover {
   display: none !important;
 }
 
-.curtain {
-  background-image: url('IMG/backgroiund.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  z-index: 9999;
-  transition: transform 1s ease;
-  transform-origin: top;
-  font-family: "Bellota", serif;
-  color: #ac0d17;
-  text-shadow:
-    0 0 7px #fff,
-    0 0 10px #fff,
-    0 0 21px #fff,
-    0 0 42px rgb(153, 0, 0),
-    0 0 82px rgb(153, 0, 0),
-    0 0 92px rgb(153, 0, 0),
-    0 0 102px rgb(153, 0, 0),
-    0 0 151px rgb(153, 0, 0);
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
+
+.translate-middle-y {
+  transform: translateY(-100%) !important;
+  top: -100px !important;
+}
+
+.jumping-gif {
+  transition: all 0.5s ease-in-out;
+}
+.gal-block {
+  position: relative;
 }
 
 section {
   cursor: url(IMG/Pastry_Bag_icon-icons.com_68714.png) 2 2, auto;
-}
-
-.circles>div {
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
-}
-
-.block1 {
-  background: linear-gradient(217deg, rgba(255, 0, 0, .8), rgba(255, 98, 0, 0.893) 70.71%);
-  opacity: 0.7;
-  animation: rotate 3s infinite linear;
-  /* animation-delay: 0.2s; */
-}
-
-.block2 {
-  background: linear-gradient(217deg, rgba(255, 0, 191, 0.8), rgba(48, 37, 255, 0.703) 70.71%);
-  opacity: 0.7;
-  animation: rotate 4s infinite linear;
-  /* animation-delay: 0.4s; */
-}
-
-.block3 {
-  background: linear-gradient(217deg, rgba(106, 255, 0, 0.8), rgba(0, 255, 153, 0.781) 70.71%);
-  opacity: 0.7;
-  animation: rotate 5s infinite linear;
-  /* animation-delay: 0.5s; */
-}
-
-.block4 {
-  background: linear-gradient(217deg, rgba(255, 221, 0, 0.877), rgba(255, 242, 0, 0.772) 70.71%);
-  opacity: 0.7;
-  animation: rotate 3s infinite linear;
-  /* animation-delay: 1s; */
-
-}
-
-.circles {
-  z-index: 9999;
-  display: flex;
-  flex-wrap: wrap;
-  width: 410px;
-  height: 410px;
 }
 
 .content {
@@ -117,199 +69,15 @@ section {
   text-align: center;
 }
 
-.hidden {
-  transform: translateY(-100%);
-}
-
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg) translate(125px);
-  }
-
-  50% {
-    transform: rotate(180deg) translate(125px);
-  }
-
-  100% {
-    transform: rotate(360deg) translate(125px);
-  }
-}
-
-.rainbow-button {
-  --primary-neon: rgba(255, 0, 0, 0.9);
-  --light-neon: rgba(161, 87, 87, 0.7);
-  --pulse-neon: rgba(149, 20, 20, 0.5);
-  --bright-neon: rgb(177, 24, 24);
-  --off-neon: #333;
-
-  --neon-shadow: 0 0 7px 4px var(--light-neon), 0 0 7px 4px var(--light-neon) inset;
-  --neon-shadow-pulse: 0 0 8px 5px var(--pulse-neon), 0 0 8px 5px var(--pulse-neon) inset;
-  --neon-shadow-bright: 0 0 8px 4px var(--bright-neon), 0 0 8px 4px var(--bright-neon) inset;
-  --neon-shadow-text: 0 0 7px var(--primary-neon);
-
-  width: 150px;
-  height: auto;
-  color: var(--primary-neon);
-  text-shadow: var(--neon-shadow-text);
-  border: 5px solid var(--primary-neon);
-  left: 45%;
-  top: 85%;
-  font-size: 2vw;
-  box-shadow: var(--neon-shadow);
-  animation: flicker 5s linear infinite;
-}
-
-.rainbow-button:hover {
-  cursor: pointer;
-}
-
-@keyframes flicker {
-  0% {
-    box-shadow: var(--neon-shadow);
-  }
-
-  45% {
-    box-shadow: var(--neon-shadow-pulse);
-  }
-
-  65% {
-    box-shadow: none;
-    border-color: var(--off-neon);
-    color: var(--off-neon);
-    text-shadow: none;
-  }
-
-  75% {
-    box-shadow: var(--neon-shadow);
-    border-color: var(--primary-neon);
-    color: var(--primary-neon);
-    text-shadow: var(--neon-shadow-text);
-  }
-
-  85% {
-    box-shadow: none;
-    border-color: var(--off-neon);
-    color: var(--off-neon);
-    text-shadow: none;
-  }
-
-  90% {
-    box-shadow: var(--neon-shadow);
-    border-color: var(--primary-neon);
-    color: var(--primary-neon);
-    text-shadow: var(--neon-shadow-text);
-  }
-
-  90.01% {
-    box-shadow: none;
-    border-color: var(--off-neon);
-    color: var(--off-neon);
-    text-shadow: none;
-  }
-
-  94% {
-    box-shadow: none;
-    border-color: var(--off-neon);
-  }
-
-  94.01% {
-    box-shadow: var(--neon-shadow);
-    border-color: var(--primary-neon);
-  }
-
-  95% {
-    box-shadow: var(--neon-shadow);
-    border-color: var(--primary-neon);
-  }
-
-  95.01% {
-    box-shadow: none;
-    border-color: var(--off-neon);
-  }
-
-  95.5% {
-    box-shadow: none;
-    border-color: var(--off-neon);
-  }
-
-  95.51% {
-    box-shadow: var(--neon-shadow);
-    border-color: var(--primary-neon);
-  }
-
-  96% {
-    box-shadow: var(--neon-shadow);
-    border-color: var(--primary-neon);
-  }
-
-  96.01% {
-    box-shadow: none;
-    border-color: var(--off-neon);
-  }
-
-  96.5% {
-    box-shadow: none;
-    border-color: var(--off-neon);
-  }
-
-  96.51% {
-    box-shadow: var(--neon-shadow-bright);
-    border-color: var(--primary-neon);
-  }
-
-  100% {
-    box-shadow: var(--neon-shadow);
-    border-color: var(--primary-neon);
-  }
-}
-
-.rainbow-button>h2 {
-  animation: jump 1s linear infinite;
-}
-
-@keyframes jump {
-  0% {
-    transform: translateY(-2px);
-  }
-
-  50% {
-    transform: translateY(15px);
-  }
-
-  100% {
-    transform: translateY(-2px);
-  }
+.container{
+  width: 100%;
+ min-height: 75vh;
 }
 
 #gallery {
   background: url('IMG/конди\ 1\ \(1\).png') no-repeat;
   backdrop-filter: blur(1px);
   background-size: cover;
-}
-
-/* .line1 {
-  position: absolute;
-  z-index: 1;
-  width: ;   
-  top: 0; } */
-
-.gallery-block {
-  background-color: #31394ce0;
-  width: 250px;
-  gap: 30px;
-}
-
-.gal-block {
-  background-color: #142241b8;
-  width: 300px;
-  height: 100px;
-  font-size: 18px;
-}
-
-.gallery-text {
-  width: 520px;
-  font-size: 15px;
 }
 
 #ad {
@@ -346,7 +114,7 @@ section {
   background-color: #1b294ff0;
   margin: 5% auto;
   border: 1px solid #888;
-  width: 60%;
+  max-width: 80%;
 }
 
 .close {
@@ -363,33 +131,46 @@ section {
 
 /* отзывы */
 .swiper-container {
-  width: 200px;
-  height: 350px;
+  width: 300px;
+  height: 500px;
 }
 
 .swiper-slide {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-
-/* отзывы */
-
-.line {
+.img-reviews-container {
   width: 100%;
-  height: 102px;
-  color: white;
-  font-size: 30px;
-  background-color: #8F0000;
-  /* margin-top: -196px; 
-  padding: 30px; */
+  position: relative;
 }
 
-/*тетрис*/
+.img-reviews {
+  animation: imgRun 20s linear infinite;
+  white-space: nowrap;
+  width: 200%; 
+}
+
+@keyframes imgRun {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); 
+  }
+}
+
+.img-reviews img {
+ padding: 0 8px;
+  box-sizing: border-box;
+}
+
+/*игра*/
 .tetris-container {
 background-image: url('IMG/шеф-табличка.jpg');
 background-repeat: no-repeat;
 background-size: cover;
   width: 310px;
   height: 420px;
+  flex-shrink: 0;
 }
 
 .game-window {
@@ -409,7 +190,6 @@ background-size: cover;
 }
 
 /*о мастер-классе*/
-
 .about-masterclass {
   padding: 40px 0;
 }
@@ -419,14 +199,37 @@ background-size: cover;
   max-width: 600px; 
 }
 
-
 .btn {
   background-color: #e67e22;
-  transition: background-color 0.3s;
+  border: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 0 #c0392b,
+              0 5px 10px rgba(0,0,0,0.2);
+  position: relative;
+  top: 0;
 }
 
 .btn:hover {
   background-color: #d35400;
+  box-shadow: 0 4px 0 #c0392b,
+              0 5px 15px rgba(0,0,0,0.3);
+}
+
+.btn:focus, .btn:active {
+  background-color: #d35400; 
+  box-shadow: 0 1px 0 #c0392b; 
+  outline: none; 
+  top: 3px; 
+  box-shadow: 0 1px 0 #c0392b, 
+              0 2px 5px rgba(0,0,0,0.2);
+  transform: scale(0.98);
+  animation: press 0.3s ease;
+}
+
+@keyframes press {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(0.98); }
 }
 
 #name-master::after {
@@ -447,16 +250,6 @@ background-size: cover;
 
 #name-master.underline::after {
   transform: scaleX(1);
-}
-
-/* блок с отзывами*/
-.rating {
-  color: gold;
-  margin-bottom: 10px;
-}
-
-.star {
-  font-size: 30px;
 }
 
 a.nav-link:hover {
@@ -486,6 +279,7 @@ a.nav-link:hover {
 #flashlight img {
   display: block;
   transition: transform 0.1s ease-out; 
+  pointer-events: none;
 }
 
 #flashlight::before {
@@ -516,18 +310,12 @@ a.nav-link:hover {
 .coverflow-swiper-slide {
   opacity: 0.3; 
   transition: opacity 0.3s;
-  width: 80%;
-  padding: 12px;
+  width: 70%;
   background: #ffffffed;
 }
 
 .swiper-slide-active {
   opacity: 1;
-}
-.swiper-slide img {
-  width: 80%;
-  height: auto;
-  border-radius: 10px;
 }
 
 .hidden {
@@ -658,6 +446,7 @@ footer {
   font-size: 14px;
   margin-bottom: 5px;
 }
+
 li>a{
   font-size: 16px;
 }
@@ -669,10 +458,11 @@ li>a{
   text-decoration: underline;
 }
 
-
 .price-box {
-  background-color: rgba(112, 27, 72, 0.8);
+  background-color: rgb(129 57 172);
   transition: all 0.3s ease;
+  max-width: 390px;
+  min-height: 530px;
 }
 .price-box:hover {
   transform: translateY(-5px);
@@ -681,7 +471,7 @@ li>a{
 
 .current-price {
   color: #fff;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .old-price {
@@ -695,79 +485,14 @@ li>a{
   animation: pulse 2s infinite;
 }
 
-
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-/*отзывы*/
-.reviews-swiper {
-  padding: 15px; 
-}
-
-.swiper-slide {
-  height: auto;
-}
-
-.card {
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
-}
-
-.rating {
-  color: #ffc107;
-  letter-spacing: 2px;
-}
-
-.star {
-  position: relative;
-  display: inline-block;
-}
-
-.stats {
-  background-color: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-/* Адаптация для мобильных */
-@media (max-width: 992px) {
-  .row {
-      flex-direction: column;
-  }
-  
-  .col-lg-4, .col-lg-8 {
-      max-width: 100%;
-  }
-  
-  .col-lg-4 {
-      margin-bottom: 30px !important;
-  }
-}
-
-
 #registrationForm{
   margin: 0 auto;
-  max-width: 395px;
+  max-width: 390px;
   min-height: 530px;
   background: url('IMG/Выпечка\ Макарон.jpg') no-repeat center;
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
-  margin-bottom: 50px;
   cursor: pointer;
 }
-
-/* #registrationForm>input:hover{
- border: 3px solid rgba(98, 0, 255, 0.8);
-  } */
 
 #registration {
   background: url('IMG/конди\ 1\ \(1\).png') no-repeat;
@@ -788,9 +513,91 @@ background: rgba(255, 255, 255, 0.5);
 
 #regButton{
   background-color: #d080b7;
+  box-shadow: 0 4px 0 #562b48,
+  0 5px 15px rgba(0,0,0,0.3) !important;
   margin-top: 20px;
 }
 
 #regButton:hover{
   background-color: #a46690;
+  box-shadow: 0 4px 0 #562b48,
+              0 5px 15px rgba(0,0,0,0.3) !important;
+}
+
+#regButton:focus, #regButton:active {
+  background-color: #d080b7 !important; 
+  box-shadow: 0 1px 0 #562b48 !important; 
+  outline: none; 
+  top: 3px; 
+  box-shadow: 0 1px 0 #562b48, 
+              0 2px 5px rgba(0,0,0,0.2);
+  transform: scale(0.98);
+  animation: press 0.3s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/*отзывы*/
+.reviews-swiper {
+  padding: 15px; 
+}
+
+.card {
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.rating {
+  color: #ffc107;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 35px;
+}
+
+.stats {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.gal-block, .gallery-text {
+  width: 100%; 
+  max-width: 500px;
+  height: auto;
+  min-height: 100px;  
+  background-color: #142241b8;
+  font-size: clamp(24px, 2vw, 18px); 
+  position: relative;
+}
+
+.gallery-block {
+  width: 100%;
+  max-width: 500px; 
+  background-color: #31394ce0;
+  height: auto;
+  aspect-ratio: 5/4; 
+}
+
+.gallery-text {
+  width: 520px;
+  font-size: 15px;
+}
+
+.geo-text > p{
+  font-size: 20px;
 }
